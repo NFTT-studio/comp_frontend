@@ -1,35 +1,29 @@
 import React from "react";
-import DataApi from "./DataApi";
-import {GridList, GridListTile} from "@material-ui/core";
+import {Typography, GridList, GridListTile, GridListTileBar} from "@material-ui/core";
 
-class RecentlyToken extends React.Component {
+class MyToken extends React.Component {
 
 
-    constructor() {
-        super();
-        this.state = {
-            tokens:[]
-        };
-    }
-    componentDidMount = async () =>{
-
-        let tokens = await DataApi.pageTokens(0);
-        if(tokens&& tokens.code==0){
-            this.setState({tokens: tokens.data.slice(0,12)});
-        }
-
-    }
-    render() {
+     render(){
+         console.info(this.props.tokens.length)
         return (
 
-            <GridList cellHeight={150} cols={9}>
+            <GridList cellHeight={200} cols={5}>
                 {
-
-                    this.state.tokens.map((token,index)=>(
-                        <GridListTile cols={index<3?3:1} key={token.gene} rows={index<3?3:1}>
-                            <img src={token.image} />
+                    this.props.tokens.map((token,index)=>(
+                        <GridListTile cols={1} key={token.gene}>
+                            <img src={token.image} alt={token.name} />
+                            <GridListTileBar
+                                title={token.name}
+                                titlePosition="top"
+                                actionPosition="left"
+                            />
                         </GridListTile>
                     ))
+                }
+                {
+                    this.props.tokens.length===0&&
+                        <Typography style={{color:"gray"}}>My wallet is empty</Typography>
                 }
             </GridList>
 
@@ -39,4 +33,4 @@ class RecentlyToken extends React.Component {
 
 }
 
-export default RecentlyToken;
+export default MyToken;
