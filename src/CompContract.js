@@ -37,7 +37,7 @@ class CompContractUtil{
                     this.contract.mintDate(address),
                     this.contract.addressMintAmount(address)
                ]);
-
+          console.info(mintAmount);
           let nextMintTime = parseFloat(mintTime) + (parseInt(mintAmount/5)+1) * 120;  //*24*3600;
           console.info(nextMintTime);
           let cooltime =  nextMintTime - parseInt(Date.now()/1000);
