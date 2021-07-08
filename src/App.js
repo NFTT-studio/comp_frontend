@@ -24,12 +24,13 @@ import RecentlyToken from "./RecentlyToken";
 import MyToken from "./MyToken";
 import Timer from "./componets/timer/Timer";
 import MaskCard from "./componets/maskcard/MaskCard";
+import About from "./componets/about/About";
 
 
 
 const style_root={
   // backgroundColor:,
-  paddingTop: "120px",
+  paddingTop: "80px",
 
   // margin:"20px"
 };
@@ -39,7 +40,8 @@ const style_flex_center={
   alignItems:"center"
 }
 const section_title={
-  marginBottom:"10px"
+  marginBottom:"10px",
+  marginTop: "40px"
 }
 
 class App extends React.Component{
@@ -217,6 +219,10 @@ class App extends React.Component{
     this.setState({luckyNumber:e.target.value});
 
   }
+  _handleClearTx=()=>{
+    localStorage.removeItem("penddingTx")
+    this.setState({penddingTx:null});
+  }
 
   render() {
     // let classes = useStyles();
@@ -272,10 +278,9 @@ class App extends React.Component{
               <RecentlyToken />
             </Grid>
 
-            <Grid container style={{margin:"50px 0px",minHeight:"250px"}}>
+            <Grid container style={{minHeight:"250px" ,padding:"40px", display:"flex",flexDirection:"row" ,marginTop:"20px"}}>
+
             <Grid item xs={12} style={{width:"300px",justifyContent:"center",alignItems:"center",flexDirection:"column",display:"flex"}}>
-
-
 
               {null === this.state.newToken &&
                   <Grid container>
@@ -307,25 +312,8 @@ class App extends React.Component{
                           variant="outlined"
                       />
                       <Button variant="contained" color="secondary" onClick={this.handleMint} style={{margin: "20px"}}
-                              size={"large"}>Mint</Button>
-                      <Dialog
-                          open={this.state.openLuckyAdvice}
-                          onClose={() => this.setState({openLuckyAdvice: false})}
-                          aria-labelledby="alert-dialog-title"
-                          aria-describedby="alert-dialog-description"
-                      >
-                        <DialogTitle id="alert-dialog-title">{"Magic comes"}</DialogTitle>
-                        <DialogContent>
-                          <DialogContentText id="alert-dialog-description">
-                            Don't forget to enter your lucky number
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button color="secondary" autoFocus onClick={() => this.setState({openLuckyAdvice: false})}>
-                            OK
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
+                              size={"large"}>Mint Free</Button>
+
                     </Grid>
                     }
                     {null !==this.state.penddingTx&&
@@ -342,8 +330,17 @@ class App extends React.Component{
                         TX detail:
                       </Typography>
                       <a style={{ color:"grey",margin:"15px"}} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
+                        <Button size={"small"} variant={"outlined"}  onClick={this._handleClearTx}>clear</Button>
                       </Grid>
                     }
+                    <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column"}}>
+                      <Typography style={{width:"680px",margin:"10px",color:"gray"}}>
+                        1. Hold m <a target={"_blank"}  href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
+                      </Typography>
+                      <Typography style={{width:"680px",color:"gray"}}>
+                        2. Free claim once every 4*n hours (n = The number of NFT minted at the current address)
+                      </Typography>
+                    </Grid>
                   </Grid>
               }
 
@@ -357,12 +354,22 @@ class App extends React.Component{
             }
           </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h4" style={section_title}>
-              My Mint
-            </Typography>
-            <MyToken tokens={this.state.currentMint}/>
-          </Grid>
+
+              {this.state.currentMint.length > 0 &&
+              <Grid item xs={12}>
+                <Typography variant="h4" style={section_title}>
+                  My Mint
+                </Typography>
+                <MyToken tokens={this.state.currentMint}/>
+              </Grid>
+              }
+
+              <Grid item xs={12} >
+                <Typography variant="h4" style={section_title}>
+                  About
+                </Typography>
+                <About />
+              </Grid>
 
         </Grid>
         </Container>
@@ -396,6 +403,24 @@ class App extends React.Component{
 
                 <Button onClick={()=>{this.setState({alertMessage:""})}} color="primary" autoFocus>
                   Ok
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+                open={this.state.openLuckyAdvice}
+                onClose={() => this.setState({openLuckyAdvice: false})}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"Magic comes"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Don't forget to enter your lucky number
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button color="secondary" autoFocus onClick={() => this.setState({openLuckyAdvice: false})}>
+                  OK
                 </Button>
               </DialogActions>
             </Dialog>
