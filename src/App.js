@@ -54,7 +54,7 @@ class App extends React.Component{
     this.state = {
       currentAccount:"",
       currentMint:[],
-      chainId:"0x3",
+      chainId:"0x4",
       luckyNumber:null,
       pendding:false,
       newToken:null,
@@ -66,7 +66,7 @@ class App extends React.Component{
     };
   }
   _isMainChain=()=>{
-     return this.state.chainId === "0x3";
+     return this.state.chainId === "0x4";
    }
 
   async componentDidMount(){
@@ -112,7 +112,7 @@ class App extends React.Component{
       return;
     }
     if(!this._isMainChain()){
-      this.setState({alertMessage:"Please Select Ropsten Test Network First"})
+      this.setState({alertMessage:"Please Select Rinkeby Test Network First"})
       return ;
     }
     this.requestAccount();
@@ -168,7 +168,7 @@ class App extends React.Component{
       return;
     }
     if(!this._isMainChain()){
-      this.setState({alertMessage:"Please Select Ropsten Test Network First"})
+      this.setState({alertMessage:"Please Select Rinkeby Test Network First"})
       return ;
     }
 
@@ -226,6 +226,7 @@ class App extends React.Component{
 
   render() {
     // let classes = useStyles();
+      let totalToken = this.state.currentMint[0]?this.state.currentMint[0].tokenId:0;
     return (
           <div  style={style_root}>
           <AppBar position={"fixed"} >
@@ -259,12 +260,12 @@ class App extends React.Component{
                 </a>
               </Grid>
               }
-              {this.state.chainId!=="0x3" &&
+              {this.state.chainId!=="0x4" &&
               <Grid container style={style_flex_center}>
                   <Chip
                       style={{padding: "40px", fontSize: "x-large", marginBottom: "40px"}}
                       // label="Please select Ethereum Main Network (Mainnet)"
-                      label="Please select Ropsten Test Network"
+                      label="Please select Rinkeby Test Network"
                       color="secondary"
                   />
               </Grid>
@@ -335,7 +336,7 @@ class App extends React.Component{
                     }
                     <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column"}}>
                       <Typography style={{width:"680px",margin:"10px",color:"gray"}}>
-                        1. Hold m <a target={"_blank"}  href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
+                        1. Hold m({totalToken}) <a target={"_blank"} rel={"noreferrer"} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
                       </Typography>
                       <Typography style={{width:"680px",color:"gray"}}>
                         2. Free claim once every 4*n hours (n = The number of NFT minted at the current address)
