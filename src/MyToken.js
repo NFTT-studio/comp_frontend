@@ -3,16 +3,21 @@ import {Typography, GridList, GridListTile, GridListTileBar} from "@material-ui/
 
 class MyToken extends React.Component {
 
+    handleClick=(e)=>{
+        if(this.props.onTokenClick) {
+            this.props.onTokenClick(this.props.tokens[e.target.dataset.index]);
+        }
+    }
 
      render(){
          console.info(this.props.tokens.length)
         return (
 
-            <GridList cellHeight={200} cols={5}>
+            <GridList cellHeight={300} cols={4}>
                 {
                     this.props.tokens.map((token,index)=>(
                         <GridListTile cols={1} key={token.gene}>
-                            <img src={token.image} alt={token.name} />
+                            <img src={token.image} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
                             <GridListTileBar
                                 title={token.name}
                                 titlePosition="top"

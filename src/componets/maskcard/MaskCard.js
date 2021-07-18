@@ -16,9 +16,8 @@ class MaskCard extends React.Component{
 
             <CardActionArea>
                 <CardMedia
-
                     style={{height:"345px"}}
-                    image={this.props.token.iimage}
+                    image={this.props.token.image}
                     title={this.props.token.name}
                 />
                 <CardContent>

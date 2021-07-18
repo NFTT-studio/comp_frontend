@@ -25,6 +25,7 @@ import MyToken from "./MyToken";
 import Timer from "./componets/timer/Timer";
 import MaskCard from "./componets/maskcard/MaskCard";
 import About from "./componets/about/About";
+import Vs from "./componets/vs/Vs";
 
 
 
@@ -62,7 +63,11 @@ class App extends React.Component{
       openLuckyAdvice:false,
       cooltime:0,
       isInstallMetaMask:true,
-      alertMessage:""
+      alertMessage:"",
+      showCp:false,
+      atoken:null,
+      btoken:null,
+      standardList:null,
     };
   }
   _isMainChain=()=>{
@@ -70,6 +75,11 @@ class App extends React.Component{
    }
 
   async componentDidMount(){
+    let standardArray = await  DataApi.getAllStandard();
+    console.info(standardArray);
+    if(standardArray["code"]===0){
+      this.setState({standardList: standardArray["data"]});
+    }
 
     this.provider = await detectEthereumProvider();
 
@@ -214,6 +224,28 @@ class App extends React.Component{
 
   }
 
+  _showDiff = (value)=>{
+      //get gene info
+      //get
+      console.info(value)
+    if(value){
+      let mask =value.gene.split("_")[0];
+      // let standToken = this.state.standardList[mask];
+      console.info(this.state.standardList[mask])
+      console.info(this.state.standardList[mask])
+      this.setState({
+        atoken:this.state.standardList[mask],
+        btoken:value,
+        showCp:true
+      });
+
+
+    }
+
+
+
+  }
+
   _handleLuckyNumberChange=(e)=>{
 
     this.setState({luckyNumber:e.target.value});
@@ -226,7 +258,8 @@ class App extends React.Component{
 
   render() {
     // let classes = useStyles();
-      let totalToken = this.state.currentMint[0]?this.state.currentMint[0].tokenId:0;
+    //   let totalToken = this.state.currentMint[0]?this.state.currentMint[0].tokenId:0;
+    //   console.info(this.state.currentMint)
     return (
           <div  style={style_root}>
           <AppBar position={"fixed"} >
@@ -276,7 +309,7 @@ class App extends React.Component{
               <Typography variant="h4" style={section_title}>
                 New mint
               </Typography>
-              <RecentlyToken />
+              <RecentlyToken  onTokenClick={this._showDiff}/>
             </Grid>
 
             <Grid container style={{minHeight:"250px" ,padding:"40px", display:"flex",flexDirection:"row" ,marginTop:"20px"}}>
@@ -336,7 +369,7 @@ class App extends React.Component{
                     }
                     <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column"}}>
                       <Typography style={{width:"680px",margin:"10px",color:"gray"}}>
-                        1. Hold m({totalToken}) <a target={"_blank"} rel={"noreferrer"} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
+                        1. Hold m <a target={"_blank"} rel={"noreferrer"} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
                       </Typography>
                       <Typography style={{width:"680px",color:"gray"}}>
                         2. Free claim once every 4*n hours (n = The number of NFT minted at the current address)
@@ -361,7 +394,7 @@ class App extends React.Component{
                 <Typography variant="h4" style={section_title}>
                   My Mint
                 </Typography>
-                <MyToken tokens={this.state.currentMint}/>
+                <MyToken tokens={this.state.currentMint} onTokenClick={this._showDiff}/>
               </Grid>
               }
 
@@ -425,8 +458,9 @@ class App extends React.Component{
                 </Button>
               </DialogActions>
             </Dialog>
-
-
+            {this.state.showCp &&
+              <Vs open={this.state.showCp} atoken={this.state.atoken} btoken={this.state.btoken} onClose={()=>{this.setState({showCp:false}) }}/>
+            }
           </div>
 
     );

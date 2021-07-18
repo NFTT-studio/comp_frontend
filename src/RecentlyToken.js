@@ -19,6 +19,13 @@ class RecentlyToken extends React.Component {
         }
 
     }
+
+    handleClick=(e)=>{
+        if(this.props.onTokenClick) {
+            this.props.onTokenClick(this.state.tokens[e.target.dataset.index]);
+        }
+    }
+
     render() {
         return (
 
@@ -28,11 +35,11 @@ class RecentlyToken extends React.Component {
                     this.state.tokens.map((token,index)=>(
 
                         <GridListTile cols={index<3?3:1} key={token.gene} rows={index<3?3:1}>
-                            <img src={token.image} dd={token.gene} alt={token.name}/>
+                            <img src={token.image} onClick={this.handleClick} data-index={index} alt={token.name}/>
                             {index<3&&
                                 <GridListTileBar
                                     title={token.name}
-                                    subtitle={<span>gene: {token.gene}</span>}
+                                    // subtitle={<span>gene: {token.gene}</span>}
 
                                 />
                             }

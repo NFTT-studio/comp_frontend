@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import {Switch} from "@material-ui/core";
+
+import {BrowserRouter as Router,Link ,Switch,Route} from "react-router-dom";
+import Timer from "./componets/timer/Timer";
+import StandardList from "./componets/standardlist/StandardList";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <Router>
+      <Switch>
+          <Route path="/list"><StandardList /> </Route>
+          <Route path="/"><App /> </Route>
+      </Switch>
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
