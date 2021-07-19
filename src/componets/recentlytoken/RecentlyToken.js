@@ -1,5 +1,5 @@
 import React from "react";
-import DataApi from "./DataApi";
+import DataApi from "../../DataApi";
 import {GridList, GridListTile,GridListTileBar} from "@material-ui/core";
 
 class RecentlyToken extends React.Component {

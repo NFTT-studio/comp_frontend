@@ -7,16 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter as Router,Link ,Switch,Route} from "react-router-dom";
 import Timer from "./componets/timer/Timer";
-import StandardList from "./componets/standardlist/StandardList";
+import StandardList from "./componets/facebook/Facebook";
 
 ReactDOM.render(
   <React.StrictMode>
-      <Router>
-      <Switch>
-          <Route path="/list"><StandardList /> </Route>
-          <Route path="/"><App /> </Route>
-      </Switch>
-      </Router>
+      <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
