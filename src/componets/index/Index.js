@@ -289,7 +289,7 @@ class Index extends React.Component{
                         {this.state.currentMint.length > 0 &&
                         <Grid item xs={12}>
                             <Typography variant="h4" className={classes.section_title}>
-                                My Mint
+                                My Wallet
                             </Typography>
                             <MyToken tokens={this.state.currentMint} onTokenClick={ this.props.onTokenClick }/>
                         </Grid>
