@@ -3,15 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import {Switch} from "@material-ui/core";
 
-import {BrowserRouter as Router,Link ,Switch,Route} from "react-router-dom";
-import Timer from "./componets/timer/Timer";
-import StandardList from "./componets/facebook/Facebook";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme =createMuiTheme( {
+    typography: {
+        fontFamily: 'TTHoves',
+    },
+    palette: {
+        type: 'dark',
+        primary: {
+            main:"#000000"
+        },
+        secondary:{
+            main:"#3D00FF"
+        },
+        warning:{
+            main:"#F14E1D"
+        }
+    },
+});
 
 ReactDOM.render(
   <React.StrictMode>
+      <ThemeProvider theme={theme}>
       <App />
+      </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

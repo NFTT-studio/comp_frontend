@@ -6,7 +6,6 @@ import {
   Button,
   Backdrop,
   CircularProgress,
-  DialogTitle,
   DialogContentText,
   DialogContent,
   DialogActions,
@@ -25,7 +24,8 @@ import Index from "./componets/index/Index";
 
 const useStyles = theme=>({
   root: {
-    paddingTop: theme.spacing(8)
+    paddingTop: theme.spacing(10),
+    minHeight: theme.spacing(120)
   },
   style_flex_center:{
     display:"flex",
@@ -59,8 +59,6 @@ class App extends React.Component{
    }
 
   async componentDidMount(){
-    console.log("componentDidMount");
-    //load all standard info
     let standardArray = await  DataApi.getAllStandard();
     console.debug(standardArray);
     if(standardArray["code"]===0){
@@ -82,20 +80,6 @@ class App extends React.Component{
         this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
 
         await this.requestAccount();
-
-        // let accounts = await this.provider.request({ method: 'eth_requestAccounts' });
-
-        // if(null !== this.state.penddingTx && null !== this.state.currentAccount && this._isMainChain()){
-        //
-        //   //clear
-        //   let tx = await this.compContractUtil.getTransaction(this.state.penddingTx);
-        //   if(null !== tx && tx.blockNumber >0){
-        //     this.setState({penddingTx:null});
-        //     localStorage.removeItem("penddingTx");
-        //   }else{
-        //     this._checkTx();
-        //   }
-        // }
       }
 
     } else {
@@ -173,10 +157,9 @@ class App extends React.Component{
                   <a href={"https://metamask.io/download.html"} rel={"noreferrer"} target="_blank"
                      style={{textDecoration: "none"}}>
                     <Button
-                        // style={{padding: "40px", fontSize: "x-large", marginBottom: "40px"}}
                         variant="contained"
                         size={"large"}
-                        color="secondary"
+                        color={"secondary"}
                     >Please click and install MetaMask!  https://metamask.io/download.html</Button>
                   </a>
                 </Grid>
@@ -184,10 +167,10 @@ class App extends React.Component{
                 {this.state.chainId!=="0x4" &&
                 <Grid container className={classes.style_flex_center}>
                   <Chip
-                      style={{padding: "40px", fontSize: "x-large", marginBottom: "40px"}}
+                      style={{padding: "30px", fontSize: "x-large"}}
                       // label="Please select Ethereum Main Network (Mainnet)"
                       label="Please select Rinkeby Test Network"
-                      color="secondary"
+                      color={"secondary"}
                   />
                 </Grid>
                 }

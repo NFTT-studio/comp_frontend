@@ -3,9 +3,7 @@ import React from "react";
 
 
 class Header extends React.Component{
-    constructor(props) {
-        super(props);
-    }
+
     _handleConnectClick=(e)=>{
         if(this.props.onConnect){
             this.props.onConnect()
@@ -16,8 +14,13 @@ class Header extends React.Component{
         return (
             <AppBar position={"fixed"} >
                 <Toolbar >
+
                     <Typography variant="h6" noWrap style={{flexGrow:1}}>
-                        Chinese Opera Mask Plus
+                        {/*<Redirect to={"/"}>*/}
+                        <a href={"/"} style={{textDecoration:"none",color:"white"}}>
+                         Chinese Opera Mask Plus
+                        </a>
+                        {/*</Redirect>*/}
                     </Typography>
                     {this.props.account&&
                     <Typography variant="subtitle1" noWrap>

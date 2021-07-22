@@ -23,6 +23,19 @@ const useStyles = theme=>({
         marginBottom:theme.spacing(1),
         marginTop: theme.spacing(5)
     },
+    facebook:{
+        justifyContent:"flex-end",
+        display:"flex",
+        alignItems:"flex-end" ,
+        padding:theme.spacing(2),
+        fontSize:theme.spacing(2.5),
+        fontWeight:"bolder"
+    },
+    link_text: {
+        textDecoration:"none",
+        color:"white"
+    }
+
 });
 
 class Index extends React.Component{
@@ -38,7 +51,8 @@ class Index extends React.Component{
             newToken:null,
             penddingTx: localStorage.getItem("penddingTx"),
             cooltime:0,
-            account:props.account
+            account:props.account,
+            totalToken:''
         };
     }
     _isMainChain=()=>{
@@ -46,7 +60,6 @@ class Index extends React.Component{
     }
     componentDidMount=async ()=>{
 
-        console.log("index componentDidMount");
         this.provider = await detectEthereumProvider();
         if (this.provider) {
             this.compContractUtil = new CompContractUtil(this.provider);
@@ -54,7 +67,7 @@ class Index extends React.Component{
             this.provider.on('accountsChanged',this.handleAccountsChanged);
             await  this.requestAccount();
 
-            if(this.state.account){
+            if(this.state.account && this._isMainChain()){
                 await this._loadUserInfo();
                 if(null !== this.state.penddingTx && this._isMainChain()){
                     let tx = await this.compContractUtil.getTransaction(this.state.penddingTx);
@@ -75,12 +88,18 @@ class Index extends React.Component{
     }
 
     _loadUserInfo= async ()=>{
-        let [addressTokens,cooltime] = await Promise.all([ DataApi.fetchAddressTokens(this.state.account),
-            this.compContractUtil.cooltimeLeft(this.state.account)]);
-        console.log(cooltime)
+        let [addressTokens,cooltime,totalToken] = await Promise.all(
+            [
+            DataApi.fetchAddressTokens(this.state.account),
+            this.compContractUtil.cooltimeLeft(this.state.account),
+            this.compContractUtil.totalToken(),
+            ]
+        );
+        console.info(totalToken)
         this.setState({
             currentMint: addressTokens.code!=="0"?[]:addressTokens.data,
-            cooltime:cooltime
+            cooltime:cooltime,
+            totalToken:totalToken
         });
     }
     handleAccountsChanged=async (accounts)=>{
@@ -174,13 +193,20 @@ class Index extends React.Component{
         const { classes } = this.props;
         return (
             <React.Fragment>
-
                         <Grid item xs={12}>
-                            <Typography variant="h4" className={classes.section_title}>
+                            <Grid container>
+                            <Grid item xs={6}>
+                                <Typography variant="h4" className={classes.section_title}>
                                 New mint
                             </Typography>
+                            </Grid>
+                            <Grid item xs={6} className={classes.facebook}>
+                                <Link to={"/facebook"} className={classes.link_text}>Facebook</Link>
+                            </Grid>
+                            </Grid>
+                            <Grid>
                             <RecentlyToken  onTokenClick={this.props.onTokenClick}/>
-                            <Link to={"/facebook"} >Facebook</Link>
+                            </Grid>
                         </Grid>
 
                         <Grid container style={{minHeight:"250px" ,padding:"40px", display:"flex",flexDirection:"row" ,marginTop:"20px"}}>
@@ -206,10 +232,11 @@ class Index extends React.Component{
                                     }}>
                                         <TextField
                                             onChange={this._handleLuckyNumberChange}
-                                            style={{width: "280px", textAlign: "center"}}
+                                            style={{width: "280px", textAlign: "center",color:"white"}}
                                             id="outlined-number"
                                             label="Some magical things will happen"
-                                            type="number"
+                                            // type="number"
+                                            color={"secondary"}
                                             placeholder={"Enter your lucky number"}
                                             InputLabelProps={{
                                                 shrink: true,
@@ -230,19 +257,19 @@ class Index extends React.Component{
                                         flexGrow: 1,
                                         display: "flex",
 
-                                    }}> <CircularProgress color="secondary" size={20}/>
+                                    }}> <CircularProgress color={"#000"} size={20}/>
                                         <Typography noWrap style={{marginLeft:"25px",color:"gray"}}>
                                             TX detail:
                                         </Typography>
-                                        <a style={{ color:"grey",margin:"15px"}} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
+                                        <a style={{ color:"grey",margin:"15px",textDecoration:"none" }} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
                                         <Button size={"small"} variant={"outlined"}  onClick={this._handleClearTx}>clear</Button>
                                     </Grid>
                                     }
-                                    <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column"}}>
-                                        <Typography style={{width:"680px",margin:"10px",color:"gray"}}>
-                                            1. Hold m <a target={"_blank"} rel={"noreferrer"} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}>NMT</a> and get COMP NFT (m = The number of all minted NFTs )
+                                    <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column",marginTop:"10px"}}>
+                                        <Typography style={{width:"680px",margin:"10px"}}>
+                                            1. Hold <a target={"_blank"} rel={"noreferrer"} style={{color:"white", margin:"0px",fontSize:"20px" }} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}> {this.state.totalToken} NMT </a> and get COMP NFT
                                         </Typography>
-                                        <Typography style={{width:"680px",color:"gray"}}>
+                                        <Typography style={{width:"680px"}}>
                                             2. Free claim once every 4*n hours (n = The number of NFT minted at the current address)
                                         </Typography>
                                     </Grid>
@@ -250,10 +277,10 @@ class Index extends React.Component{
                                 }
                                 {null !== this.state.newToken &&
                                 <Grid style={{justifyContent:"center",alignItems:"center",flexDirection:"column",display:"flex"}}>
-                                    <Typography color={"secondary"}  variant={"h3"} style={{margin:"20px"}}>
+                                    <Typography color={"error"}  variant={"h3"} style={{margin:"15px"}}>
                                         Congratulations on mint success!
                                     </Typography>
-                                    <MaskCard token={this.state.newToken}/>
+                                    <MaskCard token={this.state.newToken} onTokenClick={ this.props.onTokenClick }/>
                                 </Grid>
                                 }
                             </Grid>

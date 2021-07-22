@@ -10,14 +10,13 @@ class MyToken extends React.Component {
     }
 
      render(){
-         console.info(this.props.tokens.length)
         return (
 
             <GridList cellHeight={300} cols={4}>
                 {
                     this.props.tokens.map((token,index)=>(
                         <GridListTile cols={1} key={token.gene}>
-                            <img src={token.image} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
+                            <img src={token.originalimage+"/thumb"} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
                             <GridListTileBar
                                 title={token.name}
                                 titlePosition="top"

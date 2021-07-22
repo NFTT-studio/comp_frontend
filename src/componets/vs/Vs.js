@@ -3,7 +3,6 @@ import Modal from "@material-ui/core/Modal"
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {Avatar, Chip, Grid} from "@material-ui/core";
-import MaskCard from "../maskcard/MaskCard";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
@@ -25,19 +24,8 @@ const paper={
     padding: '30px 60px',
     display:'flex',
     flexDirection:'row',
-    // alignItems:'center',
-    // justifyItems:'center'
 }
-const cp_left={
-    display: 'flex',
-    alignItems: 'right',
-    justifyContent: 'right'
-}
-const cp_right={
-    display: 'flex',
-    alignItems: 'left',
-    justifyContent: 'left'
-}
+
 
 
 
@@ -79,7 +67,7 @@ class Vs extends React.Component{
                             <CardActionArea>
                                 <CardMedia
                                     style={{height:"345px",backgroundColor:"gold"}}
-                                    image={this.props.atoken.image}
+                                    image={this.props.atoken.originalimage+"/thumb"}
                                     title={this.props.atoken.name}
 
                                 />
@@ -104,7 +92,7 @@ class Vs extends React.Component{
                                                       size="medium"
                                                       avatar={<Avatar>M{index+1}</Avatar>}
                                                       label={value}
-                                                      color={"secondary"}
+                                                      color={"primary"}
                                                       style={{margin:"10px 10px 0px 0px"}}
                                                 />
 
@@ -120,7 +108,7 @@ class Vs extends React.Component{
                             <CardActionArea>
                                 <CardMedia
                                     style={{height:"345px",backgroundColor:"gold"}}
-                                    image={this.props.btoken.image}
+                                    image={this.props.btoken.originalimage+"/thumb"}
                                     title={this.props.btoken.name}
                                 />
                                 <CardContent>
@@ -133,7 +121,7 @@ class Vs extends React.Component{
                                             size="medium"
                                             avatar={<Avatar>E</Avatar>}
                                             label={this.props.btoken.eye}
-                                            color={  this.props.atoken.eye== this.props.btoken.eye? "primary":"default"}
+                                            color={  this.props.atoken.eye === this.props.btoken.eye? "primary":"default"}
                                             style={{margin:"10px 10px 0px 0px"}}
                                         />
                                         {
@@ -144,7 +132,7 @@ class Vs extends React.Component{
                                                       size="medium"
                                                       avatar={<Avatar>M{index+1}</Avatar>}
                                                       label={value}
-                                                      color={this.props.atoken.maskup[index]== this.props.btoken.maskup[index]? "secondary":"default"}
+                                                      color={this.props.atoken.maskup[index] === this.props.btoken.maskup[index]? "primary":"default"}
                                                       style={{margin:"10px 10px 0px 0px"}}
                                                 />
 

@@ -7,7 +7,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 class MaskCard extends React.Component{
-
+    handleClick=(e)=>{
+        if(this.props.onTokenClick) {
+            this.props.onTokenClick(this.props.token);
+        }
+    }
     render() {
 
         return (
@@ -19,6 +23,7 @@ class MaskCard extends React.Component{
                     style={{height:"345px"}}
                     image={this.props.token.iimage}
                     title={this.props.token.name}
+                    onClick={this.handleClick}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -41,7 +46,7 @@ class MaskCard extends React.Component{
                                     size="medium"
                                     avatar={<Avatar>M{index+1}</Avatar>}
                                     label={value}
-                                    color={"secondary"}
+                                    color={"primary"}
                                       style={{margin:"10px 10px 0px 0px"}}
                                 />
 

@@ -35,7 +35,8 @@ class RecentlyToken extends React.Component {
                     this.state.tokens.map((token,index)=>(
 
                         <GridListTile cols={index<3?3:1} key={token.gene} rows={index<3?3:1}>
-                            <img src={token.image} onClick={this.handleClick} data-index={index} alt={token.name}/>
+                            <img src={token.originalimage+ (index<3?"/thumb":"/thumb2")} onClick={this.handleClick} data-index={index} alt={token.name}
+                                 style={{cursor: "pointer"}}/>
                             {index<3&&
                                 <GridListTileBar
                                     title={token.name}
