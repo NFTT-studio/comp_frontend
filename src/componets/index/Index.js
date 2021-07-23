@@ -52,26 +52,28 @@ class Index extends React.Component{
             penddingTx: localStorage.getItem("penddingTx"),
             cooltime:0,
             account:props.account,
-            totalToken:''
+            totalToken:'',
+            chainId:'',
         };
     }
     _isMainChain=()=>{
-        return this.props.chainId === "0x4";
+        return this.state.chainId === "0x4";
     }
     componentDidMount=async ()=>{
 
         this.provider = await detectEthereumProvider();
         if (this.provider) {
             this.compContractUtil = new CompContractUtil(this.provider);
-            // this.provider.on('chainChanged', this.handleChainChanged);
+            this.provider.on('chainChanged', this.handleChainChanged);
             this.provider.on('accountsChanged',this.handleAccountsChanged);
+            this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
             await  this.requestAccount();
 
             if(this.state.account && this._isMainChain()){
                 await this._loadUserInfo();
                 if(null !== this.state.penddingTx && this._isMainChain()){
                     let tx = await this.compContractUtil.getTransaction(this.state.penddingTx);
-                    if(null !== tx && tx.blockNumber >0){
+                    if(null !== tx && tx.blockNumber >0 && tx.status>0){
                         this.setState({penddingTx:null});
                         localStorage.removeItem("penddingTx");
                     }else{
@@ -81,7 +83,10 @@ class Index extends React.Component{
             }
         }
     }
-
+    handleChainChanged=(_chainId)=> {
+        this.setState({chainId:_chainId});
+        console.log("kk");
+    }
     requestAccount = async ()=>{
         let accounts = await this.provider.request({ method: 'eth_requestAccounts' });
         await this.handleAccountsChanged(accounts);
@@ -127,6 +132,7 @@ class Index extends React.Component{
     }
 
     handleMint=async ()=>{
+
         if(!this.provider){
             this.alertMessage("Please Install MetaMask First");
             return;
@@ -152,6 +158,7 @@ class Index extends React.Component{
             // tx.gt
             localStorage.setItem("penddingTx",tx.hash);
             await this._checkTx();
+
             this.togglePenddingView();
 
         }catch(err){
@@ -161,6 +168,8 @@ class Index extends React.Component{
     }
 
     _checkTx= async ()=>{
+
+
 
         let filter = this.compContractUtil.contract.filters.Transfer(null,this.state.currentAccount);
 
@@ -174,7 +183,15 @@ class Index extends React.Component{
             localStorage.removeItem("penddingTx");
 
             console.log(metadata);
-        })
+        });
+        this.compContractUtil.provider.waitForTransaction(this.state.penddingTx,1).then((txr)=>{
+
+            if(txr.status ===0 ){
+                this.alertMessage("Transaction Error, Please Check it")
+            }
+            console.log(txr);
+
+        });
 
     }
 
@@ -238,6 +255,7 @@ class Index extends React.Component{
                                             // type="number"
                                             color={"secondary"}
                                             placeholder={"Enter your lucky number"}
+
                                             InputLabelProps={{
                                                 shrink: true,
                                             }}
@@ -249,7 +267,7 @@ class Index extends React.Component{
                                     </Grid>
                                     }
                                     {null !==this.state.penddingTx&&
-                                    <Grid time xs={12} style={{
+                                    <Grid item xs={12} style={{
                                         margin: "10px",
                                         justifyContent: "center",
                                         alignItems: "center",
@@ -257,11 +275,11 @@ class Index extends React.Component{
                                         flexGrow: 1,
                                         display: "flex",
 
-                                    }}> <CircularProgress color={"#000"} size={20}/>
+                                    }}> <CircularProgress color={"inherit"} size={20}/>
                                         <Typography noWrap style={{marginLeft:"25px",color:"gray"}}>
                                             TX detail:
                                         </Typography>
-                                        <a style={{ color:"grey",margin:"15px",textDecoration:"none" }} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
+                                        <a style={{ color:"white",margin:"15px",textDecoration:"none" }} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
                                         <Button size={"small"} variant={"outlined"}  onClick={this._handleClearTx}>clear</Button>
                                     </Grid>
                                     }
@@ -297,7 +315,7 @@ class Index extends React.Component{
 
                         <Grid item xs={12} >
                             <Typography variant="h4" className={classes.section_title}>
-                                About
+                                Q&A
                             </Typography>
                             <About />
                         </Grid>

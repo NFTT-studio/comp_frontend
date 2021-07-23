@@ -30,7 +30,8 @@ const useStyles = theme=>({
   style_flex_center:{
     display:"flex",
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    marginTop:theme.spacing(4)
   }
 });
 
@@ -74,14 +75,11 @@ class App extends React.Component{
       this.provider.on('connect',this.handleConnect);
       this.provider.on('disconnect',this.handleDisconnect);
       this.compContractUtil = new CompContractUtil(this.provider);
-
+      console.info("get chain Id");
+      this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
       if(!this.state.currentAccount){
-
-        this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
-
         await this.requestAccount();
       }
-
     } else {
       this.setState({isInstallMetaMask:false})
       console.log('Please install MetaMask!');
@@ -127,7 +125,6 @@ class App extends React.Component{
   _showDiff = (value)=>{
       //get gene info
       //get
-      console.info(value)
     if(value){
       let mask =value.gene.split("_")[0];
       // let standToken = this.state.standardList[mask];
@@ -183,7 +180,7 @@ class App extends React.Component{
                   account={this.state.currentAccount}
                   onTokenClick={this._showDiff}
                   onPendding={()=>{ this.setState({pendding:!this.state.pendding})  } }
-                  chainId={this.state.chainId}/> </Route>
+                  /> </Route>
             </Switch>
               </Grid>
             </Container>
@@ -192,7 +189,7 @@ class App extends React.Component{
 
           <Backdrop  style={{
             zIndex: 1000000,
-            color: '#fff',
+            // color: '#fff',
           }} open={this.state.pendding===true} onClick={()=> {this.setState({pendding:false})} }>
             <CircularProgress color="inherit" />
           </Backdrop>

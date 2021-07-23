@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 class MaskCard extends React.Component{
     handleClick=(e)=>{
         if(this.props.onTokenClick) {
+            let sourceToken = this.props.token;
+            sourceToken.originalimage = sourceToken.iimage+"?";
             this.props.onTokenClick(this.props.token);
         }
     }
@@ -29,7 +31,15 @@ class MaskCard extends React.Component{
                     <Typography gutterBottom variant="h5" component="h2">
                         {this.props.token.name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    {/*<Typography variant="body2" color="textSecondary" >*/}
+                        <Chip
+                            variant="outlined"
+                            size="medium"
+                            avatar={<Avatar>G</Avatar>}
+                            label={this.props.token.gender}
+                            color={"primary"}
+                            style={{margin:"10px 10px 0px 0px"}}
+                        />
                         <Chip
                             variant="outlined"
                             size="medium"
@@ -52,7 +62,7 @@ class MaskCard extends React.Component{
 
                             ))
                         }
-                    </Typography>
+                    {/*</Typography>*/}
 
                 </CardContent>
             </CardActionArea>

@@ -39,7 +39,7 @@ class Facebook extends React.Component{
                 </Grid>
                 {
                             this.props.standardList.map((v,index0)=>(
-                                <Grid item  xs={12} style={{margin:"10px 0px"}}>
+                                <Grid item  xs={12} style={{margin:"10px 0px"}} key={index0}>
                                     <Grid item xs={12} >
                                         <Typography variant={"h6"}>
                                         {v.name}

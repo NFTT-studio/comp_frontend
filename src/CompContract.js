@@ -6,7 +6,7 @@ class CompContractUtil{
      provider
      contract
      constructor(connect) {
-          this.provider = new ethers.providers.Web3Provider(connect)
+          this.provider = new ethers.providers.Web3Provider(connect,"any")
           this.contract = new ethers.Contract(COMP_ADDRESS,this.abi,this.provider);
      }
 
