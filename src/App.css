@@ -1,10 +1,12 @@
-@font-face {
-  font-family:'TTHoves';
-  src:url("./assets/fonts/TTHovesBlack.otf");
-}
+/*@font-face {*/
+/*  font-family:'TTHoves';*/
+/*  src:url("./assets/fonts/TTHovesBlack.otf");*/
+/*}*/
 
 body{
-  background-color: #666666;
+  /*background-color: #666666;*/
+  background-color: #1e1818;
   color: white;
+  /*padding-top: 80px;*/
 }
 

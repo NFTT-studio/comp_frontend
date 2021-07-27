@@ -19,7 +19,7 @@ class MyToken extends React.Component {
                             <img src={token.originalimage+"/thumb"} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
                             <GridListTileBar
                                 title={token.name}
-                                titlePosition="top"
+                                // titlePosition="top"
                                 actionPosition="left"
                             />
                         </GridListTile>
@@ -30,8 +30,6 @@ class MyToken extends React.Component {
                         <Typography style={{color:"gray"}}>My wallet is empty</Typography>
                 }
             </GridList>
-
-
         );
     }
 

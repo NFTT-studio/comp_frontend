@@ -32,14 +32,7 @@ class MaskCard extends React.Component{
                         {this.props.token.name}
                     </Typography>
                     {/*<Typography variant="body2" color="textSecondary" >*/}
-                        <Chip
-                            variant="outlined"
-                            size="medium"
-                            avatar={<Avatar>G</Avatar>}
-                            label={this.props.token.gender}
-                            color={"primary"}
-                            style={{margin:"10px 10px 0px 0px"}}
-                        />
+
                         <Chip
                             variant="outlined"
                             size="medium"
@@ -62,6 +55,14 @@ class MaskCard extends React.Component{
 
                             ))
                         }
+                    <Chip
+                        variant="outlined"
+                        size="medium"
+                        avatar={<Avatar>G</Avatar>}
+                        label={this.props.token.gender}
+                        color={"primary"}
+                        style={{margin:"10px 10px 0px 0px"}}
+                    />
                     {/*</Typography>*/}
 
                 </CardContent>

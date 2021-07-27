@@ -9,7 +9,7 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions,
-  Dialog, Container, Grid, Chip,
+  Dialog, Container, Grid,
 
 } from '@material-ui/core';
 import DataApi from "./DataApi";
@@ -45,7 +45,7 @@ class App extends React.Component{
     super();
     this.state = {
       currentAccount:"",
-      chainId:"0x4",
+      chainId:"0x1",
       isInstallMetaMask:true,
       alertMessage:"",
       showCp:false,
@@ -56,7 +56,7 @@ class App extends React.Component{
     };
   }
   _isMainChain=()=>{
-     return this.state.chainId === "0x4";
+     return this.state.chainId === "0x1";
    }
 
   async componentDidMount(){
@@ -75,7 +75,6 @@ class App extends React.Component{
       this.provider.on('connect',this.handleConnect);
       this.provider.on('disconnect',this.handleDisconnect);
       this.compContractUtil = new CompContractUtil(this.provider);
-      console.info("get chain Id");
       this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
       if(!this.state.currentAccount){
         await this.requestAccount();
@@ -86,13 +85,25 @@ class App extends React.Component{
     }
 
   }
+  _handleSwithChain = async() =>{
+
+    try {
+      await this.provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x1' }],
+      });
+    } catch (switchError) {
+      console.info(switchError);
+    }
+  }
+
   _handleConnectClick=async ()=>{
     if(!this.provider){
       this.setState({alertMessage:"Please Install MetaMask First"});
       return;
     }
     if(!this._isMainChain()){
-      this.setState({alertMessage:"Please Select Rinkeby Test Network First"})
+      this.setState({alertMessage:"Please Select Ethereum Main Network First"})
       return ;
     }
     this.requestAccount();
@@ -111,7 +122,8 @@ class App extends React.Component{
   }
 
   handleChainChanged=(_chainId)=> {
-    this.setState({chainId:_chainId});
+    window.location.reload();
+    // this.setState({chainId:_chainId});
   }
 
   handleAccountsChanged=async (accounts)=>{
@@ -127,9 +139,6 @@ class App extends React.Component{
       //get
     if(value){
       let mask =value.gene.split("_")[0];
-      // let standToken = this.state.standardList[mask];
-      console.info(this.state.standardList[mask])
-      console.info(this.state.standardList[mask])
       this.setState({
         atoken:this.state.standardList[mask],
         btoken:value,
@@ -161,14 +170,17 @@ class App extends React.Component{
                   </a>
                 </Grid>
                 }
-                {this.state.chainId!=="0x4" &&
+                {this.state.chainId!=="0x1" &&
                 <Grid container className={classes.style_flex_center}>
-                  <Chip
-                      style={{padding: "30px", fontSize: "x-large"}}
-                      // label="Please select Ethereum Main Network (Mainnet)"
-                      label="Please select Rinkeby Test Network"
+                  <Button
+                      onClick={this._handleSwithChain}
+                      variant={"contained"}
+                      size={"large"}
                       color={"secondary"}
-                  />
+                  >
+                    Click And Switch Ethereum Main Network
+                  </Button>
+
                 </Grid>
                 }
 

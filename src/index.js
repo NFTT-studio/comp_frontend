@@ -8,13 +8,14 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme =createMuiTheme( {
     typography: {
-        fontFamily: 'TTHoves',
+        // fontFamily: 'TTHoves',
     },
     palette: {
         type: 'dark',
         primary: {
-            main:"#000000"
-        },
+            // main:"#000000"
+            main:"#1e1818"
+},
         secondary:{
             main:"#3D00FF"
         },

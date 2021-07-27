@@ -1,7 +1,6 @@
 import React from "react";
 import {Typography,Accordion,AccordionSummary,AccordionDetails} from "@material-ui/core";
-import { withStyles, makeStyles } from '@material-ui/core';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { withStyles  } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -27,13 +26,13 @@ const StyledTableCell = withStyles((theme) => ({
 //     },
 // });
 
-// const StyledTableRow = withStyles((theme) => ({
-//     root: {
-//         '&:nth-of-type(odd)': {
-//             backgroundColor: theme.palette.action.hover,
-//         },
-//     },
-// }))(TableRow);
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 function createData(key,value) {
     return { key, value };
@@ -41,12 +40,8 @@ function createData(key,value) {
 
 const rows = [
     createData("CryptoPunks","0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"),
-    createData("Bored Ape Yacht Club","0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"),
-    createData("Bored Ape Kennel Club","0xba30e5f9bb24caa003e9f2f0497ad287fdf95623"),
-    createData("Art Blocks Curated","0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270"),
-    createData("Cool Cats NFT","0x1a92f7381b9f03921564a437210bb9396471050c"),
     createData("Hashmasks","0xc2c747e0f7004f9e8817db2ca4997657a7746928"),
-    createData("ZED RUN","0xa5f1ea7df861952863df2e8d1312f7305dabf215")
+    createData("CryptoKitties","0x07c0ca4600dec713a40a7cc5f98bec70770f14c8")
 ];
 const dnamap=[
 
@@ -78,65 +73,74 @@ class About extends React.Component{
                        aria-controls="panel1a-content"
                        id="panel1a-header"
                    >
-                       <Typography >1. How about Chinese Opera Mask?</Typography>
+                       <Typography ><b>1. How about Chinese Opera Mask?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography >
-                           Chinese opera masks are unique to traditional Chinese opera, and are different from the makeup and plastic art of any drama in other countries. Every historical figure or a certain type of figure has a general mask. From the perspective of drama, it is characterized; from the perspective of fine art, it is pictorial.
-                            <br/><br/>
-                           The matching of Chinese opera masks with characters is also a makeup effect, with unique charm, high appreciation value and aesthetic significance. By exaggerating the strong colors and endlessly changing lines to change the original face of the actor.
+                           The Chinese opera is one of the oldest known dramatic art forms worldwide. Most audience or spectators are more fascinated with the Opera masks in every opera performance.
+                           <br/><br/>
+                           However, these masks are more than seemingly added decorations. Chinese opera masks are significant in the way that they represent the performers’ or characters’ personalities, intense moods, and status quo even. Expressive meanings through facial designs, each character has a unique mask shape.
+                           <br/><br/>
+                           Chinese opera mask is basically among the main methods, which performers use as makeup. Since opera masks are used in representing various human emotions, the change of color and facial expressions make each mask to be uniqueness.
                        </Typography>
                    </AccordionDetails>
                </Accordion>
                <Accordion>
                    <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-                       <Typography >2. How about Chinese Opera Mask+(COMP)?</Typography>
+                       <Typography ><b>2. How about Chinese Opera Mask+(COMP)?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography>
-                           Chinese Opera Masks+ (abbreviation:COMP) is a collection of NFT products created based on Chinese opera masks on the Ethereum blockchain. By increasing the randomness of the eye and makeup color changes, a more varied mask shape is created. Even the same mask can have different psychological feelings because of the viewer's different cultural background and life experience. Each COMP NFT is a unique existence and a collection value.
+                           Chinese Opera Masks+ (abbreviation: COMP) is a collection of NFTs based on the Ethereum blockchain, which is created from traditional Chinese opera art. The randomness change of the facial design, eyes, and colors created varied mask NFTs.
+                           <br/><br/>
+                           The masks instantly conveyed the emotion of characters and different intended meanings. Even the same mask can have different feelings because of the viewer's different cultural background and life experience. Each COMP NFT is a unique artwork and has a specific collection value.
+                           <br/><br/>
+                           Contract address:  <a style={{color:"white"}} rel="noreferrer" target={"_blank"} href={"https://etherscan.io/token/0xaba31c041e916e4141036f080b554d40cdb2bcd0"} > https://etherscan.io/token/0xaba31c041e916e4141036f080b554d40cdb2bcd0</a>
                        </Typography>
                    </AccordionDetails>
                </Accordion>
 
                <Accordion>
                    <AccordionSummary aria-controls="panel3a-content" id="panel3a-header">
-                       <Typography >3. How is COMP issued?</Typography>
+                       <Typography ><b>3. How is COMP issued?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography component={"div"}>
-                           The first batch of COMP works will be distributed through Ethereum, from July 26 to September 25, lasting 60 days, with a maximum circulation of 10,000. All COMP NFTs are distributed through free extraction. After the first batch is completed, the NFT of COMP will be available only through synthesis and breed.
-                            <br/><br/>
+                           From July 26 to September 25, we will launch the first batch of COMP artworks on Ethereum. It will be lasting for 60 days, with a maximum circulation of 10,000 unique COMP NFTs. All COMP NFTs are free to claim during the time. At the same time, users can claim 5-20 NMT tokens airdrop. After the first batch is completed, the NFT of COMP will be available only through synthesis and breed.
+                           <br/><br/>
                            (1) Blind box users
                            <br/><br/>
-                           Users who participate in the NFT blind box obtained by participating in the early activities of NFTMart will be directly eligible to draw COMP through the whitelist. Each whitelist has at least one chance to draw.
+                           Users who participate in the early activities of NFTMart can obtain the COMP NFT blind box, which means can be directly eligible to draw COMP through the whitelist. Each whitelist has at least one chance to claim.
                            <br/><br/>
                            (2) Users who hold NMT
                            <br/><br/>
-                           All users who hold NMT, if they hold the same amount of NMT as the currently issued NFT, can participate in the opportunity to mint COMP for free. If you hold it continuously, you can cast multiple times. The interval between each mint increases from 4 hours, and the interval between each mint increases by 4 hours.
+                           Users who hold NMT and if the amount of NMT is more than the minted NFTs have an opportunity to mint COMP for free.
                            <br/><br/>
-                           The system can cast up to 40 COMP NFTs per hour. If it exceeds 40, please wait for the next hour and try again.
+                           If you hold NMT continuously, you can mint COMP multiple times. The interval between each minting increases from 4 hours, and each minting increases by 4 hours.
+                           <br/><br/>
+                           The system can mint up to 200 COMP NFTs per hour. If it exceeds 200, please wait for the next hour and try again.
                            <br/><br/>
                            (3) Users who hold designated NFTs
                            <br/><br/>
-                           All users who hold the following NFTs can participate in the casting of COMP NFT once.
+                           users who hold the following NFTs can participate in the casting of COMP NFT one time.
                            <br/><br/>
+
                            <TableContainer component={Paper}>
                                <Table  aria-label="customized table">
                                    <TableHead>
                                        <TableRow>
-                                           <TableCell>Name</TableCell>
-                                           <TableCell align="right">Contract</TableCell>
+                                           <StyledTableCell>Name</StyledTableCell>
+                                           <StyledTableCell align="right">Contract</StyledTableCell>
                                        </TableRow>
                                    </TableHead>
                                    <TableBody>
                                        {rows.map((row) => (
-                                           <TableRow key={row.key}>
-                                               <TableCell component="th" scope="row">
+                                           <StyledTableRow key={row.key}>
+                                               <StyledTableCell component="th" scope="row">
                                                    {row.key}
-                                               </TableCell>
-                                               <TableCell align="right">{row.value}</TableCell>
-                                           </TableRow>
+                                               </StyledTableCell>
+                                               <StyledTableCell align="right">{row.value}</StyledTableCell>
+                                           </StyledTableRow>
                                        ))}
                                    </TableBody>
                                </Table>
@@ -147,30 +151,30 @@ class About extends React.Component{
 
                <Accordion>
                    <AccordionSummary aria-controls="panel4a-content" id="panel4a-header">
-                       <Typography >4. What are the classifications of COMP, and what is the supply?</Typography>
+                       <Typography ><b>4. What are the classifications of COMP, and what is the supply?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography component={"div"}>
-                           The first batch of COMP NFT is derived from 100 original Chinese theater masks. Each mask will have various changes in eyes and makeup colors. COMP will have gender attributes, which will be used in the second phase of synthesis and breed. Used when new NFT.
+                           The first batch of COMP NFT is derived from 100 original Chinese Opera masks. Each mask will have various changes in eyes and colors. COMP will have gender attributes, which will be used in the second phase of synthesis and breed.
                            <br/><br/>
-                           There are 5 eye colors for COMP, and there are multiple areas for makeup colors, and each area will undergo color changes independently. There are up to 10 color changes for each area. The changes in eyes and colors are completely random, and all colors have random probability the same.
+                           Among the supply of COMP, there is a total of 5 eye colors. The different mask has different facial designs, and each area of the mask will undergo color changes independently. There are up to 10 color changes for each area. The changes in eyes and colors are completely random, and the random probability of color is the same.
                            <br/><br/>
                            <TableContainer component={Paper}>
                                <Table  aria-label="customized table">
                                    <TableHead>
                                        <TableRow>
-                                           <TableCell>DNA-NAME</TableCell>
-                                           <TableCell align="right"> Color </TableCell>
+                                           <StyledTableCell>DNA-NAME</StyledTableCell>
+                                           <StyledTableCell align="right"> Color </StyledTableCell>
                                        </TableRow>
                                    </TableHead>
                                    <TableBody>
                                        {dnamap.map((row) => (
-                                           <TableRow key={row.key}>
-                                               <TableCell component="th" scope="row">
+                                           <StyledTableRow key={row.key}>
+                                               <StyledTableCell component="th" scope="row">
                                                    {row.key}
-                                               </TableCell>
-                                               <TableCell align="right">{row.value}</TableCell>
-                                           </TableRow>
+                                               </StyledTableCell>
+                                               <StyledTableCell align="right">{row.value}</StyledTableCell>
+                                           </StyledTableRow>
                                        ))}
                                    </TableBody>
                                </Table>
@@ -183,32 +187,32 @@ class About extends React.Component{
                                <Table  aria-label="customized table">
                                    <TableHead>
                                        <TableRow>
-                                           <TableCell>Gender</TableCell>
-                                           <TableCell align="right"> Probability </TableCell>
-                                           <TableCell align="right"> BackgroundColor </TableCell>
+                                           <StyledTableCell>Gender</StyledTableCell>
+                                           <StyledTableCell align="right"> Probability </StyledTableCell>
+                                           <StyledTableCell align="right"> BackgroundColor </StyledTableCell>
                                        </TableRow>
                                    </TableHead>
                                    <TableBody>
-                                           <TableRow >
-                                               <TableCell component="th" scope="row">Male</TableCell>
-                                               <TableCell align="right">35%</TableCell>
-                                               <TableCell align="right">#99cee8</TableCell>
-                                           </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Female</TableCell>
-                                           <TableCell align="right">25%</TableCell>
-                                           <TableCell align="right">#f08083</TableCell>
-                                       </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Atoke</TableCell>
-                                           <TableCell align="right">35%</TableCell>
-                                           <TableCell align="right">#797eb3</TableCell>
-                                       </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Androgyny</TableCell>
-                                           <TableCell align="right">5%</TableCell>
-                                           <TableCell align="right">#f4a878</TableCell>
-                                       </TableRow>
+                                           <StyledTableRow >
+                                               <StyledTableCell component="th" scope="row">Male</StyledTableCell>
+                                               <StyledTableCell align="right">35%</StyledTableCell>
+                                               <StyledTableCell align="right">#99cee8</StyledTableCell>
+                                           </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Female</StyledTableCell>
+                                           <StyledTableCell align="right">25%</StyledTableCell>
+                                           <StyledTableCell align="right">#f08083</StyledTableCell>
+                                       </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Atoke</StyledTableCell>
+                                           <StyledTableCell align="right">35%</StyledTableCell>
+                                           <StyledTableCell align="right">#797eb3</StyledTableCell>
+                                       </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Androgyny</StyledTableCell>
+                                           <StyledTableCell align="right">5%</StyledTableCell>
+                                           <StyledTableCell align="right">#f4a878</StyledTableCell>
+                                       </StyledTableRow>
                                    </TableBody>
                                </Table>
                            </TableContainer>
@@ -219,64 +223,66 @@ class About extends React.Component{
 
                <Accordion>
                    <AccordionSummary aria-controls="panel5a-content" id="panel5a-header">
-                       <Typography >5. What is the use of the gender of COMP? How about breed and synthesis</Typography>
+                       <Typography ><b>5. What is the use of the gender of COMP? How about breed and synthesis</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
-                       <Typography>
-                           About 1 month after the end of free minting, we will start the  synthesis and reproduction of the COMP. Through  synthesis and reproduction, users can obtain their favorite COMP.
+                       <Typography component={"div"}>
+                           About 1 month after the end of free minting, we will start the synthesis and breed of the COMP. Users can obtain their favorite COMP through synthesis and breed, You own the lifecycle of the COMP.
                            <br/><br/>
-                           <b>Synthesis:</b>
+                           <b>Synthesis</b>
                            <br/>
-                           The synthesis of COMP is to destroy two COMP, and then minting a new COMP. During synthesis, the DNA of the two faces will fuse. There is a certain probability of mutation, resulting in completely different new varieties.
+                           The synthesis of COMP is through burning two COMP NFTs to minting a new COMP NFT. During the synthesis, the DNA of the two faces will fuse. There is a certain probability of mutation, which will be resulting in rare and new varieties.
                            <br/><br/>
-                           Breed:
+                           <b>Breed</b>
                            <br/>
-                           The breed of COMP is that a new COMP can be mint when two COMPs are not consumed.
+                           The breed of COMP is that a new COMP can be mint but the original COMPs will not consume.
                            <br/><br/>
-                           The gender of COMP affects the reproductive ability of COMP. There are four genders: Female, Male, Androgyny and Atoke.
+                           The gender of COMP affects the reproductive ability of COMP.
+                           <br/><br/>
+                           There are four genders: Female, Male, Androgyny, and Atoke.
                            <br/><br/>
                            The rules for whether different sexes can breed are as follows:
-                           <br/><br/>
+                           <br/>
                            <TableContainer component={Paper}>
                                <Table  aria-label="customized table">
                                    <TableHead>
                                        <TableRow>
-                                           <TableCell></TableCell>
-                                           <TableCell align="right">Female</TableCell>
-                                           <TableCell align="right">Male</TableCell>
-                                           <TableCell align="right">Androgyny</TableCell>
-                                           <TableCell align="right">Atoke</TableCell>
+                                           <StyledTableCell></StyledTableCell>
+                                           <StyledTableCell align="right">Female</StyledTableCell>
+                                           <StyledTableCell align="right">Male</StyledTableCell>
+                                           <StyledTableCell align="right">Androgyny</StyledTableCell>
+                                           <StyledTableCell align="right">Atoke</StyledTableCell>
                                        </TableRow>
                                    </TableHead>
                                    <TableBody>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Female</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                       </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Male</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                       </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Androgyny</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">o</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                       </TableRow>
-                                       <TableRow >
-                                           <TableCell component="th" scope="row">Atoke</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                           <TableCell align="right">x</TableCell>
-                                       </TableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Female</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                       </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Male</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                       </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Androgyny</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">o</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                       </StyledTableRow>
+                                       <StyledTableRow >
+                                           <StyledTableCell component="th" scope="row">Atoke</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                           <StyledTableCell align="right">x</StyledTableCell>
+                                       </StyledTableRow>
                                    </TableBody>
                                </Table>
                            </TableContainer>
@@ -287,32 +293,21 @@ class About extends React.Component{
                </Accordion>
                <Accordion>
                    <AccordionSummary aria-controls="panel5a-content" id="panel6a-header">
-                       <Typography >6. What wallets can be used for minting COMP?</Typography>
+                       <Typography ><b>6. Which wallets can be used for minting COMP?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography>
-                           Ethereum wallets that support tradable on the chain can be used to extract COMP, such as the commonly used MetaMask.
+                           Ethereum wallets that support tradable on the chain can be used to extract COMP, such as MetaMask.
                        </Typography>
                    </AccordionDetails>
                </Accordion>
                <Accordion>
                    <AccordionSummary aria-controls="panel7a-content" id="panel7a-header">
-                       <Typography >7.How to sell COMP NFT?</Typography>
+                       <Typography ><b>7. How to sell COMP NFT?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography>
-                           The  COMP NFT can be sold at <a href={"https://opensea.io/"}  style={{color:"white"}}  target={"_blank"}>https://opensea.io/</a>.
-                       </Typography>
-                   </AccordionDetails>
-               </Accordion>
-
-               <Accordion>
-                   <AccordionSummary aria-controls="panel8a-content" id="panel8a-header">
-                       <Typography >8. How many digits can be entered for the lucky number?</Typography>
-                   </AccordionSummary>
-                   <AccordionDetails>
-                       <Typography>
-                           It can be entered arbitrarily, and 4 digits or less are recommended, otherwise it may affect the transaction fee on the chain.
+                           The  COMP NFT can be sold at <a href={"https://opensea.io/"} rel="noreferrer" style={{color:"white"}}  target={"_blank"}>https://opensea.io/</a>.
                        </Typography>
                    </AccordionDetails>
                </Accordion>

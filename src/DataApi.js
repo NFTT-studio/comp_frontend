@@ -20,5 +20,6 @@ class DataApi{
         return await res.json();
 
     }
+
 }
 export default DataApi

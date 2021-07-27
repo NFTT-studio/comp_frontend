@@ -116,14 +116,7 @@ class Vs extends React.Component{
                                         {this.props.btoken.name}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="div">
-                                        <Chip
-                                            variant="outlined"
-                                            size="medium"
-                                            avatar={<Avatar>G</Avatar>}
-                                            label={this.props.btoken.gender}
-                                            color={"default"}
-                                            style={{margin:"10px 10px 0px 0px"}}
-                                        />
+
                                         <Chip
                                             variant="outlined"
                                             size="medium"
@@ -146,6 +139,14 @@ class Vs extends React.Component{
 
                                             ))
                                         }
+                                        <Chip
+                                            variant="outlined"
+                                            size="medium"
+                                            avatar={<Avatar>G</Avatar>}
+                                            label={this.props.btoken.gender}
+                                            color={"default"}
+                                            style={{margin:"10px 10px 0px 0px"}}
+                                        />
                                     </Typography>
 
                                 </CardContent>

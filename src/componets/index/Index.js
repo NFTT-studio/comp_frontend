@@ -1,11 +1,14 @@
 import React from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import CompContractUtil from "../../CompContract";
+import {ethers} from "ethers";
 import {
     Grid,
-    TextField,
     Button,
     Typography,
+    FormControl,
+    InputLabel,
+    Select,
     CircularProgress,
 } from '@material-ui/core';
 import DataApi from "./../../DataApi";
@@ -16,7 +19,6 @@ import MaskCard from "../maskcard/MaskCard";
 import About from "../about/About";
 
 import {withStyles} from "@material-ui/core";
-import {Link} from "react-router-dom";
 
 const useStyles = theme=>({
     section_title:{
@@ -42,12 +44,14 @@ class Index extends React.Component{
     //global provider
     provider
     compContractUtil
-
+    airdropamount = 100
+    nmtContrctAddress="0xd81b71cBb89B2800CDb000AA277Dc1491dc923C3"
     constructor(props) {
         super(props);
+
         this.state = {
             currentMint:[],
-            luckyNumber:null,
+            airdropConditions:this.nmtContrctAddress,
             newToken:null,
             penddingTx: localStorage.getItem("penddingTx"),
             cooltime:0,
@@ -57,14 +61,15 @@ class Index extends React.Component{
         };
     }
     _isMainChain=()=>{
-        return this.state.chainId === "0x4";
+        return this.state.chainId === "0x1";
     }
     componentDidMount=async ()=>{
 
         this.provider = await detectEthereumProvider();
         if (this.provider) {
             this.compContractUtil = new CompContractUtil(this.provider);
-            this.provider.on('chainChanged', this.handleChainChanged);
+
+            // this.provider.on('chainChanged', this.handleChainChanged);
             this.provider.on('accountsChanged',this.handleAccountsChanged);
             this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
             await  this.requestAccount();
@@ -85,10 +90,10 @@ class Index extends React.Component{
     }
     handleChainChanged=(_chainId)=> {
         this.setState({chainId:_chainId});
-        console.log("kk");
     }
     requestAccount = async ()=>{
         let accounts = await this.provider.request({ method: 'eth_requestAccounts' });
+
         await this.handleAccountsChanged(accounts);
     }
 
@@ -100,7 +105,6 @@ class Index extends React.Component{
             this.compContractUtil.totalToken(),
             ]
         );
-        console.info(totalToken)
         this.setState({
             currentMint: addressTokens.code!=="0"?[]:addressTokens.data,
             cooltime:cooltime,
@@ -133,27 +137,48 @@ class Index extends React.Component{
 
     handleMint=async ()=>{
 
+        debugger
         if(!this.provider){
             this.alertMessage("Please Install MetaMask First");
             return;
         }
+
         if(!this._isMainChain()){
             this.alertMessage("Please Select Rinkeby Test Network First");
             return ;
         }
 
-        if("" === this.state.currentAccount){
+        if("" === this.state.account){
             this.requestAccount();
             return;
         }
         try {
-            if(null === this.state.luckyNumber){
-                this.alertMessage("Don't forget to enter your lucky number");
-                return;
+
+            if(this.state.totalToken>this.airdropamount) {
+                if (this.state.airdropConditions === this.nmtContrctAddress) {
+                    const nmtBalance = await this.compContractUtil.balanceOf(this.state.account, this.state.airdropConditions);
+                    if (this.state.totalToken > ethers.utils.formatUnits(nmtBalance)) {
+                        this.alertMessage("Not enough holdings");
+                        return;
+                    }
+                } else if(this.state.airdropConditions === ""){
+                    const isOnWhitelist = await this.compContractUtil.isOnAirdropWhitelist(this.state.account);
+                    if(!isOnWhitelist){
+                        this.alertMessage("The current address is not in the whitelist");
+                        return;
+                    }
+                }else{
+                    const erc721balance = await this.compContractUtil.balanceOf(this.state.account ,this.state.airdropConditions);
+
+                    if(erc721balance.toString()=== "0"){
+                        this.alertMessage("There are no related NFT assets at the current address");
+                        return;
+                    }
+                }
             }
 
             this.togglePenddingView();
-            let tx = await this.compContractUtil.mint(this.state.luckyNumber);
+            let tx = await this.compContractUtil.mint(Date.now()+"",this.state.airdropConditions?this.state.airdropConditions:this.nmtContrctAddress);
             this.setState({penddingTx:tx.hash,pendding:false});
             // tx.gt
             localStorage.setItem("penddingTx",tx.hash);
@@ -171,35 +196,31 @@ class Index extends React.Component{
 
 
 
-        let filter = this.compContractUtil.contract.filters.Transfer(null,this.state.currentAccount);
+        let filter = this.compContractUtil.contract.filters.Transfer(null,this.state.account);
 
         this.compContractUtil.contract.once(filter,async (from,to,id)=>{
-            console.log(to);
             let metadata = await this.compContractUtil.tokenMetadata(
                 await this.compContractUtil.metadataURI(id)
             );
-            console.log(metadata);
             this.setState({newToken: metadata,penddingTx:null});
             localStorage.removeItem("penddingTx");
 
-            console.log(metadata);
         });
         this.compContractUtil.provider.waitForTransaction(this.state.penddingTx,1).then((txr)=>{
 
             if(txr.status ===0 ){
                 this.alertMessage("Transaction Error, Please Check it")
             }
-            console.log(txr);
+            this.setState({penddingTx:null});
+            localStorage.removeItem("penddingTx");
 
         });
 
     }
 
 
-    _handleLuckyNumberChange=(e)=>{
-
-        this.setState({luckyNumber:e.target.value});
-
+    _handleAirdropConditionsChange=(e)=>{
+        this.setState({airdropConditions:e.target.value});
     }
     _handleClearTx=()=>{
         localStorage.removeItem("penddingTx")
@@ -217,9 +238,7 @@ class Index extends React.Component{
                                 New mint
                             </Typography>
                             </Grid>
-                            <Grid item xs={6} className={classes.facebook}>
-                                <Link to={"/facebook"} className={classes.link_text}>Facebook</Link>
-                            </Grid>
+
                             </Grid>
                             <Grid>
                             <RecentlyToken  onTokenClick={this.props.onTokenClick}/>
@@ -247,20 +266,32 @@ class Index extends React.Component{
                                         flexGrow: 1,
                                         display: "flex"
                                     }}>
-                                        <TextField
-                                            onChange={this._handleLuckyNumberChange}
-                                            style={{width: "280px", textAlign: "center",color:"white"}}
-                                            id="outlined-number"
-                                            label="Some magical things will happen"
-                                            // type="number"
-                                            color={"secondary"}
-                                            placeholder={"Enter your lucky number"}
 
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            variant="outlined"
-                                        />
+
+                                        <FormControl variant="filled" >
+                                            <InputLabel htmlFor="filled-age-native-simple">Airdrop conditions</InputLabel>
+                                            <Select
+                                                native
+                                                onChange={this._handleAirdropConditionsChange}
+                                                value={this.state.airdropConditions}
+                                                inputProps={{
+                                                    name: 'conditions',
+                                                    id: 'filled-conditions-native-simple',
+                                                }}
+                                            >
+                                                {this.state.totalToken <= this.airdropamount &&
+                                                <option value={this.nmtContrctAddress}>During the top 100
+                                                    airdrop({ this.airdropamount-this.state.totalToken} remaining)</option>
+                                                }
+                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={this.nmtContrctAddress}>I Hold More Than {this.state.totalToken} NMT</option>
+                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"}>I Hold CryptoPunks</option>
+                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0xc2c747e0f7004f9e8817db2ca4997657a7746928"}>I Hold Hashmasks</option>
+                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
+                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={""}>I'm On The Whitelist</option>
+
+                                            </Select>
+                                        </FormControl>
+
                                         <Button variant="contained" color="secondary" onClick={this.handleMint} style={{margin: "20px"}}
                                                 size={"large"}>Mint Free</Button>
 
@@ -284,12 +315,15 @@ class Index extends React.Component{
                                     </Grid>
                                     }
                                     <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column",marginTop:"10px"}}>
-                                        <Typography style={{width:"680px",margin:"10px"}}>
-                                            1. Hold <a target={"_blank"} rel={"noreferrer"} style={{color:"white", margin:"0px",fontSize:"20px" }} href={"https://etherscan.io/token/0xd81b71cbb89b2800cdb000aa277dc1491dc923c3"}> {this.state.totalToken} NMT </a> and get COMP NFT
+
+                                        <Typography >
+                                            Free claim once every 4*n hours (n = The number of NFT minted at the current address)
                                         </Typography>
-                                        <Typography style={{width:"680px"}}>
-                                            2. Free claim once every 4*n hours (n = The number of NFT minted at the current address)
+
+                                        <Typography style={{ marginTop:"25px" }}>
+                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Hold NMT</a>
                                         </Typography>
+
                                     </Grid>
                                 </Grid>
                                 }
