@@ -1,4 +1,4 @@
-import {AppBar, Toolbar, Typography, withStyles} from "@material-ui/core";
+import {AppBar, Link, Toolbar, Typography, withStyles} from "@material-ui/core";
 import React from "react";
 
 const useStyles = theme=>({
@@ -15,7 +15,8 @@ class Footer extends React.Component{
             <AppBar position={"static"}  className={classes.root} >
                 <Toolbar >
                     <Typography variant="subtitle2" noWrap style={{flexGrow:1,margin:"50px"}} align={"center"} >
-                        COMP©2021 CopyRight
+                        COMP©2021 CopyRight  &nbsp;&nbsp;  Power by <Link href={"https://www.nftmart.io"} color={"inherit"} target={"_blank"}>NFTMart.io</Link>
+                        &nbsp;&nbsp; <Link href={"https://etherscan.io/address/0xaba31c041e916e4141036f080b554d40cdb2bcd0#code"} color={"inherit"} target={"_blank"}>Contract Source Code</Link>
                     </Typography>
                 </Toolbar>
             </AppBar>
