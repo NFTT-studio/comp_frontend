@@ -18,8 +18,6 @@ class DataApi{
         // let uri = "http://localhost:8080/assets/standard/list";
         let res = await fetch(uri);
         return await res.json();
-
     }
-
 }
 export default DataApi

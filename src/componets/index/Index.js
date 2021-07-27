@@ -72,23 +72,31 @@ class Index extends React.Component{
 
             // this.provider.on('chainChanged', this.handleChainChanged);
             this.provider.on('accountsChanged',this.handleAccountsChanged);
-            const totalToken = await this.compContractUtil.totalToken();
-            this.setState({totalToken,chainId:  await this.provider.request({ method: 'eth_chainId' })});
+
+            this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
 
             await  this.requestAccount();
 
-            if(this.state.account && this._isMainChain()){
-                await this._loadUserInfo();
-                if(null !== this.state.penddingTx && this._isMainChain()){
-                    let tx = await this.compContractUtil.getTransaction(this.state.penddingTx);
-                    if(null !== tx && tx.blockNumber >0 && tx.status>0){
-                        this.setState({penddingTx:null});
-                        localStorage.removeItem("penddingTx");
-                    }else{
-                        this._checkTx();
+            if(this._isMainChain()){
+
+                const totalToken = await this.compContractUtil.totalToken();
+                this.setState( {totalToken});
+                if(this.state.account ){
+                    await this._loadUserInfo();
+                    if(null !== this.state.penddingTx && this._isMainChain()){
+                        let tx = await this.compContractUtil.getTransaction(this.state.penddingTx);
+                        if(null !== tx && tx.blockNumber >0 && tx.status>0){
+                            this.setState({penddingTx:null});
+                            localStorage.removeItem("penddingTx");
+                        }else{
+                            this._checkTx();
+                        }
                     }
                 }
+
             }
+
+
         }
     }
     handleChainChanged=(_chainId)=> {
@@ -97,7 +105,7 @@ class Index extends React.Component{
     requestAccount = async ()=>{
         let accounts = await this.provider.request({ method: 'eth_requestAccounts' });
 
-        await this.handleAccountsChanged(accounts);
+        this.handleAccountsChanged(accounts);
     }
 
     _loadUserInfo= async ()=>{
