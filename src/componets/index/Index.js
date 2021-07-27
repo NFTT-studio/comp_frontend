@@ -66,12 +66,15 @@ class Index extends React.Component{
     componentDidMount=async ()=>{
 
         this.provider = await detectEthereumProvider();
+
         if (this.provider) {
             this.compContractUtil = new CompContractUtil(this.provider);
 
             // this.provider.on('chainChanged', this.handleChainChanged);
             this.provider.on('accountsChanged',this.handleAccountsChanged);
-            this.setState({chainId:  await this.provider.request({ method: 'eth_chainId' })});
+            const totalToken = await this.compContractUtil.totalToken();
+            this.setState({totalToken,chainId:  await this.provider.request({ method: 'eth_chainId' })});
+
             await  this.requestAccount();
 
             if(this.state.account && this._isMainChain()){
@@ -98,17 +101,16 @@ class Index extends React.Component{
     }
 
     _loadUserInfo= async ()=>{
-        let [addressTokens,cooltime,totalToken] = await Promise.all(
+        let [addressTokens,cooltime] = await Promise.all(
             [
             DataApi.fetchAddressTokens(this.state.account),
             this.compContractUtil.cooltimeLeft(this.state.account),
-            this.compContractUtil.totalToken(),
             ]
         );
         this.setState({
             currentMint: addressTokens.code!=="0"?[]:addressTokens.data,
-            cooltime:cooltime,
-            totalToken:totalToken
+            cooltime:cooltime
+
         });
     }
     handleAccountsChanged=async (accounts)=>{
@@ -137,7 +139,6 @@ class Index extends React.Component{
 
     handleMint=async ()=>{
 
-        debugger
         if(!this.provider){
             this.alertMessage("Please Install MetaMask First");
             return;
@@ -194,10 +195,7 @@ class Index extends React.Component{
 
     _checkTx= async ()=>{
 
-
-
         let filter = this.compContractUtil.contract.filters.Transfer(null,this.state.account);
-
         this.compContractUtil.contract.once(filter,async (from,to,id)=>{
             let metadata = await this.compContractUtil.tokenMetadata(
                 await this.compContractUtil.metadataURI(id)
