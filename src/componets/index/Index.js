@@ -153,7 +153,7 @@ class Index extends React.Component{
         }
 
         if(!this._isMainChain()){
-            this.alertMessage("Please Select Rinkeby Test Network First");
+            this.alertMessage("Please Select Ethereum Main Network First");
             return ;
         }
 
