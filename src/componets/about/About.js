@@ -73,7 +73,7 @@ class About extends React.Component{
                        aria-controls="panel1a-content"
                        id="panel1a-header"
                    >
-                       <Typography ><b>1. How about Chinese Opera Mask?</b></Typography>
+                       <Typography ><b>1. What is the Chinese Opera Mask?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography >
@@ -87,7 +87,7 @@ class About extends React.Component{
                </Accordion>
                <Accordion>
                    <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-                       <Typography ><b>2. How about Chinese Opera Mask+(COMP)?</b></Typography>
+                       <Typography ><b>2. What is Chinese Opera Mask+(COMP)?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography>
@@ -151,7 +151,7 @@ class About extends React.Component{
 
                <Accordion>
                    <AccordionSummary aria-controls="panel4a-content" id="panel4a-header">
-                       <Typography ><b>4. What are the classifications of COMP, and what is the supply?</b></Typography>
+                       <Typography ><b>4. What are the types of COMP and what is the supply?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography component={"div"}>
@@ -223,7 +223,7 @@ class About extends React.Component{
 
                <Accordion>
                    <AccordionSummary aria-controls="panel5a-content" id="panel5a-header">
-                       <Typography ><b>5. What is the use of the gender of COMP? How about breed and synthesis</b></Typography>
+                       <Typography ><b>5. What is the gender of COMP ? How about breed and synthesis?</b></Typography>
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography component={"div"}>
