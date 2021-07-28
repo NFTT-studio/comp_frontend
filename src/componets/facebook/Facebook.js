@@ -42,7 +42,7 @@ class Facebook extends React.Component{
                                 <Grid item  xs={12} style={{margin:"10px 0px"}} key={index0}>
                                     <Grid item xs={12} >
                                         <Typography variant={"h6"}>
-                                        {v.name}
+                                            {index0}. {v.name}
                                         </Typography>
                                         <Divider style={{margin: "10px 0px"}}/>
                                     </Grid>

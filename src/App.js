@@ -203,7 +203,7 @@ class App extends React.Component{
             zIndex: 1000000,
             // color: '#fff',
           }} open={this.state.pendding===true} onClick={()=> {this.setState({pendding:false})} }>
-            <CircularProgress color="inherit" />
+            <CircularProgress color="inherit" /> &nbsp; Please pay attention to the interaction of MetaMask
           </Backdrop>
 
           <Dialog
