@@ -40,7 +40,13 @@ class Header extends React.Component{
                                     Home
                                 </Link>
                                 <Link color={"inherit"} href="/facebook" >
-                                    Facebook
+                                   Facebook
+                                </Link>
+                                <Link color={"inherit"} href="https://opensea.io/collection/chinese-opera-mask-plus" target={"_blank"}>
+                                   Buy
+                                </Link>
+                                <Link color={"inherit"} href="https://t.me/NFTmart" target={"_blank"}>
+                                    Telegram
                                 </Link>
                             </Breadcrumbs>
                         </Grid>

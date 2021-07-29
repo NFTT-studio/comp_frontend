@@ -167,7 +167,7 @@ class Index extends React.Component{
                 if (this.state.airdropConditions === this.nmtContrctAddress) {
                     const nmtBalance = await this.compContractUtil.balanceOf(this.state.account, this.state.airdropConditions);
                     if (this.state.totalToken > ethers.utils.formatUnits(nmtBalance)) {
-                        this.alertMessage("Not enough holdings");
+                        this.alertMessage("Not enough holdings ("+ ethers.utils.formatUnits(nmtBalance) +"NMT)");
                         return;
                     }
                 } else if(this.state.airdropConditions === ""){
@@ -180,7 +180,7 @@ class Index extends React.Component{
                     const erc721balance = await this.compContractUtil.balanceOf(this.state.account ,this.state.airdropConditions);
 
                     if(erc721balance.toString()=== "0"){
-                        this.alertMessage("There are no related NFT assets at the current address");
+                        this.alertMessage("There are no related assets at the current address");
                         return;
                     }
                 }
@@ -285,15 +285,11 @@ class Index extends React.Component{
                                                     id: 'filled-conditions-native-simple',
                                                 }}
                                             >
-                                                {this.state.totalToken <= this.airdropamount &&
-                                                <option value={this.nmtContrctAddress}>During the top 100
-                                                    airdrop({ this.airdropamount-this.state.totalToken} remaining)</option>
-                                                }
-                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={this.nmtContrctAddress}>I Hold More Than {this.state.totalToken} NMT</option>
-                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"}>I Hold CryptoPunks</option>
-                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0xc2c747e0f7004f9e8817db2ca4997657a7746928"}>I Hold Hashmasks</option>
-                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
-                                                    <option disabled={this.state.totalToken <= this.airdropamount} value={""}>I'm On The Whitelist</option>
+                                                    <option value={this.nmtContrctAddress}>I Hold More Than {this.state.totalToken} NMT</option>
+                                                    <option value={"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"}>I Hold CryptoPunks</option>
+                                                    <option value={"0xc2c747e0f7004f9e8817db2ca4997657a7746928"}>I Hold Hashmasks</option>
+                                                    <option value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
+                                                    <option value={""}>I'm On The Whitelist</option>
 
                                             </Select>
                                         </FormControl>
