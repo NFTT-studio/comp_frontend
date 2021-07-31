@@ -24,9 +24,7 @@ class Contactgroup extends React.Component {
         const {classes} = this.props;
         return (
             <React.Fragment>
-                <Typography variant="h4" className={classes.section_title}>
-                    Discussion group
-                </Typography>
+
             <Box style={{display:"flex",alignItems:"center",justifyContent:"center",}}>
                 <Box m={5}>
                 <img alt={"https://t.me/NFTmart"} className={classes.img} width={150} src={telegramengroup}/>

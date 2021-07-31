@@ -345,7 +345,12 @@ class Index extends React.Component{
                             </Typography>
                             <About />
                         </Grid>
-                <Contactgroup />
+                <Grid item xs={12}>
+                    <Typography variant="h4" className={classes.section_title}>
+                        Discussion group
+                    </Typography>
+                    <Contactgroup />
+                </Grid>
             </React.Fragment>
 
         );
