@@ -106,7 +106,7 @@ class About extends React.Component{
                    </AccordionSummary>
                    <AccordionDetails>
                        <Typography component={"div"}>
-                           From July 26 to September 25, we will launch the first batch of COMP artworks on Ethereum. It will be lasting for 60 days, with a maximum circulation of 10,000 unique COMP NFTs. All COMP NFTs are free to claim during the time. At the same time, users can claim 5-20 NMT tokens airdrop. After the first batch is completed, the NFT of COMP will be available only through synthesis and breed.
+                           The ethereum block height reaches 13600000 , we will launch the first batch of COMP artworks on Ethereum. It will be lasting for 80 days, with a maximum circulation of 10,000 unique COMP NFTs. All COMP NFTs are free to claim during the time. At the same time, users can claim 5-20 NMT tokens airdrop. After the first batch is completed, the NFT of COMP will be available only through synthesis and breed.
                            <br/><br/>
                            (1) Blind box users
                            <br/><br/>
@@ -114,7 +114,7 @@ class About extends React.Component{
                            <br/><br/>
                            (2) Users who hold NMT
                            <br/><br/>
-                           Users who hold NMT and if the amount of NMT is more than the minted NFTs have an opportunity to mint COMP for free.
+                           Users who hold NMT have an opportunity to mint COMP for free.
                            <br/><br/>
                            If you hold NMT continuously, you can mint COMP multiple times. The interval between each minting increases from 4 hours, and each minting increases by 4 hours.
                            <br/><br/>
@@ -124,7 +124,6 @@ class About extends React.Component{
                            <br/><br/>
                            users who hold the following NFTs can participate in the casting of COMP NFT one time.
                            <br/><br/>
-
                            <TableContainer component={Paper}>
                                <Table  aria-label="customized table">
                                    <TableHead>

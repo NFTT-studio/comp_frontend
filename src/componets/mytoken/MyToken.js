@@ -1,6 +1,9 @@
 import React from "react";
 import {Typography, GridList, GridListTile, GridListTileBar} from "@material-ui/core";
 
+
+
+
 class MyToken extends React.Component {
 
     handleClick=(e)=>{
@@ -12,6 +15,7 @@ class MyToken extends React.Component {
      render(){
         return (
 
+            <React.Fragment>
             <GridList cellHeight={300} cols={4}>
                 {
                     this.props.tokens.map((token,index)=>(
@@ -20,7 +24,13 @@ class MyToken extends React.Component {
                             <GridListTileBar
                                 title={token.name}
                                 // titlePosition="top"
-                                actionPosition="left"
+                                // actionPosition="right"
+                                // actionIcon={
+                                //
+                                //     <IconButton>
+                                //         <ShareOutlined />
+                                //     </IconButton>
+                                // }
                             />
                         </GridListTile>
                     ))
@@ -30,6 +40,8 @@ class MyToken extends React.Component {
                         <Typography style={{color:"gray"}}>My wallet is empty</Typography>
                 }
             </GridList>
+
+            </React.Fragment>
         );
     }
 

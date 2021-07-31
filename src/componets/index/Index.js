@@ -1,7 +1,6 @@
 import React from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import CompContractUtil from "../../CompContract";
-import {ethers} from "ethers";
 import {
     Grid,
     Button,
@@ -19,6 +18,7 @@ import MaskCard from "../maskcard/MaskCard";
 import About from "../about/About";
 
 import {withStyles} from "@material-ui/core";
+import Contactgroup from "../contactgroup/contactgroup";
 
 const useStyles = theme=>({
     section_title:{
@@ -56,7 +56,7 @@ class Index extends React.Component{
             penddingTx: localStorage.getItem("penddingTx"),
             cooltime:0,
             account:props.account,
-            totalToken:'',
+            // totalToken:'',
             chainId:'',
         };
     }
@@ -79,8 +79,8 @@ class Index extends React.Component{
 
             if(this._isMainChain()){
 
-                const totalToken = await this.compContractUtil.totalToken();
-                this.setState( {totalToken});
+                // const totalToken = await this.compContractUtil.totalToken();
+                // this.setState( {totalToken});
                 if(this.state.account ){
                     await this._loadUserInfo();
                     if(null !== this.state.penddingTx && this._isMainChain()){
@@ -162,15 +162,7 @@ class Index extends React.Component{
             return;
         }
         try {
-
-            if(this.state.totalToken>this.airdropamount) {
-                if (this.state.airdropConditions === this.nmtContrctAddress) {
-                    const nmtBalance = await this.compContractUtil.balanceOf(this.state.account, this.state.airdropConditions);
-                    if (this.state.totalToken > ethers.utils.formatUnits(nmtBalance)) {
-                        this.alertMessage("Not enough holdings ("+ ethers.utils.formatUnits(nmtBalance) +"NMT)");
-                        return;
-                    }
-                } else if(this.state.airdropConditions === ""){
+                if(this.state.airdropConditions === ""){
                     const isOnWhitelist = await this.compContractUtil.isOnAirdropWhitelist(this.state.account);
                     if(!isOnWhitelist){
                         this.alertMessage("The current address is not in the whitelist");
@@ -179,13 +171,11 @@ class Index extends React.Component{
                 }else{
                     const erc721balance = await this.compContractUtil.balanceOf(this.state.account ,this.state.airdropConditions);
 
-                    if(erc721balance.toString()=== "0"){
+                    if(erc721balance.toString() === "0"){
                         this.alertMessage("There are no related assets at the current address");
                         return;
                     }
                 }
-            }
-
             this.togglePenddingView();
             let tx = await this.compContractUtil.mint(Date.now()+"",this.state.airdropConditions?this.state.airdropConditions:this.nmtContrctAddress);
             this.setState({penddingTx:tx.hash,pendding:false});
@@ -246,7 +236,7 @@ class Index extends React.Component{
                             </Grid>
 
                             </Grid>
-                            <Grid>
+                            <Grid style={{minHeight:"600px"}}>
                             <RecentlyToken  onTokenClick={this.props.onTokenClick}/>
                             </Grid>
                         </Grid>
@@ -285,7 +275,7 @@ class Index extends React.Component{
                                                     id: 'filled-conditions-native-simple',
                                                 }}
                                             >
-                                                    <option value={this.nmtContrctAddress}>I Hold More Than {this.state.totalToken} NMT</option>
+                                                    <option value={this.nmtContrctAddress}>I Hold 1 NMT</option>
                                                     <option value={"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"}>I Hold CryptoPunks</option>
                                                     <option value={"0xc2c747e0f7004f9e8817db2ca4997657a7746928"}>I Hold Hashmasks</option>
                                                     <option value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
@@ -323,7 +313,7 @@ class Index extends React.Component{
                                         </Typography>
 
                                         <Typography style={{ marginTop:"25px" }}>
-                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Hold NMT</a>
+                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Hold 1 NMT</a>
                                         </Typography>
 
                                     </Grid>
@@ -355,6 +345,7 @@ class Index extends React.Component{
                             </Typography>
                             <About />
                         </Grid>
+                <Contactgroup />
             </React.Fragment>
 
         );

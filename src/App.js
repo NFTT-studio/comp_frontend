@@ -157,7 +157,7 @@ class App extends React.Component{
           <Router>
             <Header account={this.state.currentAccount} onConnect={this._handleConnectClick}/>
             <Container maxWidth="lg" className={classes.root} >
-              <Grid container >
+              <Grid container>
                 {!this.state.isInstallMetaMask &&
                 <Grid container className={classes.style_flex_center}>
                   <a href={"https://metamask.io/download.html"} rel={"noreferrer"} target="_blank"
@@ -195,8 +195,10 @@ class App extends React.Component{
                   /> </Route>
             </Switch>
               </Grid>
+
             </Container>
           </Router>
+
           <Footer />
 
           <Backdrop  style={{
