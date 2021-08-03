@@ -1,6 +1,6 @@
 import {Box,  Typography} from "@material-ui/core";
 import React from "react";
-import wechatgroup from "../../assets/img/wechat.jpeg"
+import wechatgroup from "../../assets/img/wechat-comp-group.png"
 import telegramengroup from "../../assets/img/telegram-en.png"
 import telegramchgroup from "../../assets/img/telegram-ch.png"
 
@@ -29,15 +29,17 @@ class Contactgroup extends React.Component {
                 <Box m={5}>
                 <img alt={"https://t.me/NFTmart"} className={classes.img} width={150} src={telegramengroup}/>
                 <br/>
-                https://t.me/NFTmart(En)
+                https://t.me/NFTmart(EN)
                 </Box>
                 <Box m={5}>
                 <img alt={"https://t.me/NFTMartio"} className={classes.img} width={150} src={telegramchgroup}/>
                 <br/>
-                https://t.me/NFTMartio(中文)
+                https://t.me/NFTMartio(CN)
                 </Box>
-                <Box m={5}>
-                <img alt={"微信"} className={classes.img} width={150} src={wechatgroup}/>
+                <Box m={5} textAlign={"center"}>
+                <img alt={"wechat"} className={classes.img} width={150} src={wechatgroup}/>
+                    <br/>
+                wechat group
                 </Box>
             </Box>
             </React.Fragment>
