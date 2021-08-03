@@ -276,11 +276,13 @@ class Index extends React.Component{
                                                 }}
                                             >
                                                     <option value={this.nmtContrctAddress}>I Hold 1 NMT</option>
+                                                    <option value={"0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d"}>I Hold 1 FIS</option>
+                                                    <option value={"0x6c5bA91642F10282b576d91922Ae6448C9d52f4E"}>I Hold 1 PHA</option>
+                                                    <option value={"0xe63d6b308bce0f6193aec6b7e6eba005f41e36ab"}>I Hold 1 STN</option>
+                                                    <option value={""}>I'm On The Whitelist</option>
                                                     <option value={"0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"}>I Hold CryptoPunks</option>
                                                     <option value={"0xc2c747e0f7004f9e8817db2ca4997657a7746928"}>I Hold Hashmasks</option>
                                                     <option value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
-                                                    <option value={""}>I'm On The Whitelist</option>
-
                                             </Select>
                                         </FormControl>
 
