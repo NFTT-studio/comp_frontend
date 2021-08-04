@@ -1,7 +1,7 @@
 import React from "react";
-import {Typography, GridList, GridListTile, GridListTileBar} from "@material-ui/core";
+import {Typography, GridList, GridListTile, GridListTileBar,IconButton} from "@material-ui/core";
 
-
+import {ShareOutlined, Twitter} from "@material-ui/icons";
 
 
 class MyToken extends React.Component {
@@ -25,12 +25,28 @@ class MyToken extends React.Component {
                                 title={token.name}
                                 // titlePosition="top"
                                 // actionPosition="right"
-                                // actionIcon={
-                                //
-                                //     <IconButton>
-                                //         <ShareOutlined />
-                                //     </IconButton>
-                                // }
+                                actionIcon={
+                                    <React.Fragment>
+                                        <a rel="noreferrer" target={"_blank"} href={"https://twitter.com/intent/tweet?text="
+                                            +encodeURIComponent("Check out this account on OpenSea")
+                                            +"&url="
+                                            +encodeURIComponent("https://opensea.io/assets/0xaba31c041e916e4141036f080b554d40cdb2bcd0/"+token.tokenId)
+                                            +"&via=NFTmartio"}>
+                                        <IconButton>
+                                            <Twitter/>
+                                        </IconButton>
+                                        </a>
+                                        <a rel="noreferrer" href={"https://opensea.io/assets/0xaba31c041e916e4141036f080b554d40cdb2bcd0/"+ token.tokenId } target={"_blank"}>
+                                        <IconButton>
+
+                                            <ShareOutlined/>
+
+                                        </IconButton>
+                                        </a>
+                                    </React.Fragment>
+
+
+                                }
                             />
                         </GridListTile>
                     ))

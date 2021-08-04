@@ -1,6 +1,7 @@
 import React from "react";
 import DataApi from "../../DataApi";
-import {GridList, GridListTile,GridListTileBar} from "@material-ui/core";
+import {GridList, GridListTile, GridListTileBar, IconButton} from "@material-ui/core";
+import {ShareOutlined, Twitter} from "@material-ui/icons";
 
 class RecentlyToken extends React.Component {
 
@@ -41,7 +42,15 @@ class RecentlyToken extends React.Component {
                                 <GridListTileBar
                                     title={token.name}
                                     // subtitle={<span>gene: {token.gene}</span>}
-
+                                    actionIcon={
+                                        <React.Fragment>
+                                            <a rel="noreferrer" href={"https://opensea.io/assets/0xaba31c041e916e4141036f080b554d40cdb2bcd0/"+ token.tokenId } target={"_blank"}>
+                                                <IconButton>
+                                                    <ShareOutlined/>
+                                                </IconButton>
+                                            </a>
+                                        </React.Fragment>
+                                    }
                                 />
                             }
                         </GridListTile>

@@ -1,4 +1,4 @@
-import {Box,  Typography} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import React from "react";
 import wechatgroup from "../../assets/img/wechat-comp-group.png"
 import telegramengroup from "../../assets/img/telegram-en.png"
