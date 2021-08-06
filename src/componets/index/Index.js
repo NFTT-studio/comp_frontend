@@ -283,6 +283,8 @@ class Index extends React.Component{
 
                                                     <option value={"0x9469d013805bffb7d3debe5e7839237e535ec483"}>I Hold 1 RING</option>
                                                     <option value={"0x6a6c2adA3Ce053561C2FbC3eE211F23d9b8C520a"}>I Hold 1 TON</option>
+                                                    <option value={"0xb59490ab09a0f526cc7305822ac65f2ab12f9723"}>I Hold 1 LIT</option>
+
 
                                                     <option value={""}>I'm On The Whitelist</option>
                                                     <option value={"0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85"}>I Hold ENS</option>
