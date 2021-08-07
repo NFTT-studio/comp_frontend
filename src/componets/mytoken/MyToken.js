@@ -1,5 +1,5 @@
 import React from "react";
-import {Typography, GridList, GridListTile, GridListTileBar,IconButton} from "@material-ui/core";
+import {Typography, GridList, GridListTile, GridListTileBar, IconButton, Hidden} from "@material-ui/core";
 
 import {ShareOutlined, Twitter} from "@material-ui/icons";
 
@@ -21,6 +21,7 @@ class MyToken extends React.Component {
                     this.props.tokens.map((token,index)=>(
                         <GridListTile cols={1} key={token.gene}>
                             <img src={token.originalimage+"/thumb"} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
+                            <Hidden smDown>
                             <GridListTileBar
                                 title={token.name}
                                 // titlePosition="top"
@@ -48,7 +49,9 @@ class MyToken extends React.Component {
 
                                 }
                             />
+                            </Hidden>
                         </GridListTile>
+
                     ))
                 }
                 {

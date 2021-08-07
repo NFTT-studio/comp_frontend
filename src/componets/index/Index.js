@@ -8,7 +8,7 @@ import {
     FormControl,
     InputLabel,
     Select,
-    CircularProgress,
+    CircularProgress, Hidden,
 } from '@material-ui/core';
 import DataApi from "./../../DataApi";
 import RecentlyToken from "../recentlytoken/RecentlyToken";
@@ -224,6 +224,7 @@ class Index extends React.Component{
         const { classes } = this.props;
         return (
             <React.Fragment>
+
                         <Grid item xs={12}>
                             <Grid container>
                             <Grid item xs={6}>

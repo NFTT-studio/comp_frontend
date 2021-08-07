@@ -1,6 +1,6 @@
 import React from "react";
 import DataApi from "../../DataApi";
-import {GridList, GridListTile, GridListTileBar, IconButton} from "@material-ui/core";
+import {GridList, GridListTile, GridListTileBar, Hidden, IconButton} from "@material-ui/core";
 import {ShareOutlined, Twitter} from "@material-ui/icons";
 
 class RecentlyToken extends React.Component {
@@ -38,6 +38,7 @@ class RecentlyToken extends React.Component {
                         <GridListTile cols={index<3?3:1} key={token.gene} rows={index<3?3:1}>
                             <img src={token.originalimage+ (index<3?"/thumb":"/thumb2")} onClick={this.handleClick} data-index={index} alt={token.name}
                                  style={{cursor: "pointer"}}/>
+                                 <Hidden smDown>
                             {index<3&&
                                 <GridListTileBar
                                     title={token.name}
@@ -53,6 +54,7 @@ class RecentlyToken extends React.Component {
                                     }
                                 />
                             }
+                                 </Hidden>
                         </GridListTile>
                     ))
                 }

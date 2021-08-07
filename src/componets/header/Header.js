@@ -1,4 +1,4 @@
-import {AppBar, Button,  Grid, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Grid, Hidden, Toolbar, Typography} from "@material-ui/core";
 import React from "react";
 import {withStyles,Avatar,Breadcrumbs,Link} from "@material-ui/core";
 import image from '../../assets/img/favicon.jpg';
@@ -35,6 +35,7 @@ class Header extends React.Component{
                             </Typography>
                         </Grid>
                         <Grid item xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
+                            <Hidden smDown>
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" href="/" >
                                     Home
@@ -42,13 +43,17 @@ class Header extends React.Component{
                                 <Link color={"inherit"} href="/facebook" >
                                    Facebook
                                 </Link>
+
                                 <Link color={"inherit"} href="https://opensea.io/collection/chinese-opera-mask-plus" target={"_blank"}>
                                    Buy
                                 </Link>
                                 <Link color={"inherit"} href="https://t.me/NFTmart" target={"_blank"}>
                                     Telegram
                                 </Link>
+
                             </Breadcrumbs>
+                            </Hidden>
+
                         </Grid>
                         <Grid item xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
                             {this.props.account&&

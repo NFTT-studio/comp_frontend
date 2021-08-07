@@ -3,7 +3,7 @@ import {
     Typography,
     Divider,
     GridListTile,
-    GridList, GridListTileBar
+    GridList, GridListTileBar, Hidden
 } from "@material-ui/core";
 import React from "react";
 
@@ -49,6 +49,7 @@ class Facebook extends React.Component{
                                     <Grid item  container xs={12} >
                                         <Grid item xs={5}> <img  alt={v.name} src={v.originalimage+"/thumb"}  width={320}/> </Grid>
                                         <Grid item xs={7}>
+                                            <Hidden smDown>
                                             <GridList cellHeight={240} cols={6} className={classes.facelist}>
                                                 {
                                                     v.latestMint.map((token,index1)=>(
@@ -67,6 +68,8 @@ class Facebook extends React.Component{
                                                 <Typography style={{color:"gray"}}>Not Mint Yet</Typography>
                                                 }
                                         </GridList>
+                                            </Hidden>
+
                                     </Grid>
                                     </Grid>
                                 </Grid>
