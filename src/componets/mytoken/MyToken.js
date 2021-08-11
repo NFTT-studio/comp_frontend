@@ -16,16 +16,19 @@ class MyToken extends React.Component {
         return (
 
             <React.Fragment>
-            <GridList cellHeight={300} cols={4}>
+            <GridList cellHeight={this.props.h5?200:300} cols={this.props.h5?2:4}>
                 {
                     this.props.tokens.map((token,index)=>(
                         <GridListTile cols={1} key={token.gene}>
                             <img src={token.originalimage+"/thumb"} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
+                            <Hidden smUp>
+                            <GridListTileBar
+                                title={token.name}
+                                />
+                            </Hidden>
                             <Hidden smDown>
                             <GridListTileBar
                                 title={token.name}
-                                // titlePosition="top"
-                                // actionPosition="right"
                                 actionIcon={
                                     <React.Fragment>
                                         <a rel="noreferrer" target={"_blank"} href={"https://twitter.com/intent/tweet?text="
@@ -39,9 +42,7 @@ class MyToken extends React.Component {
                                         </a>
                                         <a rel="noreferrer" href={"https://opensea.io/assets/0xaba31c041e916e4141036f080b554d40cdb2bcd0/"+ token.tokenId } target={"_blank"}>
                                         <IconButton>
-
                                             <ShareOutlined/>
-
                                         </IconButton>
                                         </a>
                                     </React.Fragment>

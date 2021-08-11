@@ -28,14 +28,14 @@ class Header extends React.Component{
             <AppBar position={"fixed"} >
                 <Toolbar >
                     <Grid container>
-                        <Grid item xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
+                        <Grid item md={4} xs={12} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
                             <Avatar alt="Remy Sharp" src={image} /> &nbsp;&nbsp;
                             <Typography variant="h6" noWrap style={{flexGrow:1}}>
                                 Chinese Opera Mask Plus
                             </Typography>
                         </Grid>
-                        <Grid item xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
-                            <Hidden smDown>
+                        <Hidden smDown>
+                            <Grid item md={4} xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
                             <Breadcrumbs aria-label="breadcrumb">
                                 <Link color="inherit" href="/" >
                                     Home
@@ -52,10 +52,10 @@ class Header extends React.Component{
                                 </Link>
 
                             </Breadcrumbs>
-                            </Hidden>
 
                         </Grid>
-                        <Grid item xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
+
+                        <Grid item md={4} xs={4} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
                             {this.props.account&&
                             <Typography variant="subtitle1" noWrap style={{minWidth:"460"}} >
                                 Address: {this.props.account}
@@ -65,6 +65,7 @@ class Header extends React.Component{
                             <Button variant="contained" color={"secondary"} onClick={this._handleConnectClick}>Connect Wallet</Button>
                             }
                         </Grid>
+                        </Hidden>
                     </Grid>
                 </Toolbar>
             </AppBar>

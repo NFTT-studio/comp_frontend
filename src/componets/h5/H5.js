@@ -8,7 +8,7 @@ import {
     FormControl,
     InputLabel,
     Select,
-    CircularProgress,
+    CircularProgress
 } from '@material-ui/core';
 import DataApi from "./../../DataApi";
 import RecentlyToken from "../recentlytoken/RecentlyToken";
@@ -23,7 +23,7 @@ import Contactgroup from "../contactgroup/contactgroup";
 const useStyles = theme=>({
     section_title:{
         marginBottom:theme.spacing(1),
-        marginTop: theme.spacing(5)
+        marginTop: theme.spacing(1)
     },
     facebook:{
         justifyContent:"flex-end",
@@ -40,7 +40,7 @@ const useStyles = theme=>({
 
 });
 
-class Index extends React.Component{
+class H5 extends React.Component{
     //global provider
     provider
     compContractUtil
@@ -61,7 +61,7 @@ class Index extends React.Component{
         };
     }
     _isMainChain=()=>{
-        return this.state.chainId === "0x1";
+         return this.state.chainId === "0x1";
     }
     componentDidMount=async ()=>{
 
@@ -144,7 +144,6 @@ class Index extends React.Component{
     }
 
     handleMint=async ()=>{
-
         if(!this.provider){
             this.alertMessage("Please Install MetaMask First");
             return;
@@ -224,7 +223,6 @@ class Index extends React.Component{
         const { classes } = this.props;
         return (
             <React.Fragment>
-
                         <Grid item xs={12}>
                             <Grid container>
                             <Grid item xs={6}>
@@ -234,15 +232,13 @@ class Index extends React.Component{
                             </Grid>
 
                             </Grid>
-                            <Grid style={{minHeight:"600px"}}>
-                            <RecentlyToken  onTokenClick={this.props.onTokenClick}/>
+                            <Grid style={{minHeight:"360px"}}>
+                            <RecentlyToken h5={true}/>
                             </Grid>
                         </Grid>
 
-                        <Grid container style={{minHeight:"250px" ,padding:"40px", display:"flex",flexDirection:"row" ,marginTop:"20px"}}>
-
+                        <Grid container style={{minHeight:"250px" ,padding:"10px", display:"flex",flexDirection:"row" ,marginTop:"20px"}}>
                             <Grid item xs={12} style={{width:"300px",justifyContent:"center",alignItems:"center",flexDirection:"column",display:"flex"}}>
-
                                 {null === this.state.newToken &&
                                 <Grid container>
                                     {this.state.cooltime>0 &&
@@ -250,17 +246,16 @@ class Index extends React.Component{
                                         <Typography style={{textAlign:"center",color:"gray"}}>
                                             You Mint Cooltime Left
                                         </Typography>
-                                        <Timer seconds={this.state.cooltime} />
+                                        <Timer h5={true} seconds={this.state.cooltime} />
                                     </Grid>
                                     }
                                     {this.state.cooltime === 0 && <Grid item xs={12} style={{
                                         width: "300px",
                                         justifyContent: "center",
                                         alignItems: "center",
-                                        flexGrow: 1,
+                                        flexDirection:"column" ,
                                         display: "flex"
                                     }}>
-
 
                                         <FormControl variant="filled" >
                                             <InputLabel htmlFor="filled-age-native-simple">Airdrop conditions</InputLabel>
@@ -294,7 +289,7 @@ class Index extends React.Component{
                                                     <option value={"0x06012c8cf97bead5deae237070f9587f8e7a266d"}>I Hold CryptoKitties</option>
                                             </Select>
                                         </FormControl>
-
+<br/>
                                         <Button variant="contained" color="secondary" onClick={this.handleMint} style={{margin: "20px"}}
                                                 size={"large"}>Mint Free</Button>
 
@@ -305,22 +300,22 @@ class Index extends React.Component{
                                         margin: "10px",
                                         justifyContent: "center",
                                         alignItems: "center",
-
-                                        flexGrow: 1,
+                                        flexDirection: "column",
                                         display: "flex",
 
                                     }}> <CircularProgress color={"inherit"} size={20}/>
-                                        <Typography noWrap style={{marginLeft:"25px",color:"gray"}}>
-                                            TX detail:
+                                        <a style={{ color:"white",margin:"15px",textDecoration:"none" }} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>
+                                        <Typography noWrap style={{color:"gray"}}>
+                                            TX detail:{this.state.penddingTx.substring(0,20)+"..."}
                                         </Typography>
-                                        <a style={{ color:"white",margin:"15px",textDecoration:"none" }} href={"https://etherscan.io/tx/"+this.state.penddingTx} rel="noreferrer" target={"_blank"}>{this.state.penddingTx}</a>
+                                        </a>
                                         <Button size={"small"} variant={"outlined"}  onClick={this._handleClearTx}>clear</Button>
                                     </Grid>
                                     }
                                     <Grid item xs={12} style={{justifyContent: "center", alignItems: "center", display: "flex",flexDirection:"column",marginTop:"10px"}}>
 
                                         <Typography >
-                                            Free claim once every 4*n hours (n = The number of NFT minted at the current address)
+                                            Free claim once every 4*nCOMPs hours
                                         </Typography>
 
                                         <Typography style={{ marginTop:"25px" }}>
@@ -333,7 +328,7 @@ class Index extends React.Component{
                                 {null !== this.state.newToken &&
                                 <Grid style={{justifyContent:"center",alignItems:"center",flexDirection:"column",display:"flex"}}>
                                     <Typography color={"error"}  variant={"h3"} style={{margin:"15px"}}>
-                                        Congratulations on mint success!
+                                        Mint success!
                                     </Typography>
                                     <MaskCard token={this.state.newToken} onTokenClick={ this.props.onTokenClick }/>
                                 </Grid>
@@ -346,10 +341,9 @@ class Index extends React.Component{
                             <Typography variant="h4" className={classes.section_title}>
                                 My Wallet
                             </Typography>
-                            <MyToken tokens={this.state.currentMint} onTokenClick={ this.props.onTokenClick }/>
+                            <MyToken h5={true} tokens={this.state.currentMint} onTokenClick={ this.props.onTokenClick }/>
                         </Grid>
                         }
-
                         <Grid item xs={12} >
                             <Typography variant="h4" className={classes.section_title}>
                                 Q&A
@@ -360,7 +354,7 @@ class Index extends React.Component{
                     <Typography variant="h4" className={classes.section_title}>
                         Discussion group
                     </Typography>
-                    <Contactgroup />
+                    <Contactgroup h5={true}/>
                 </Grid>
             </React.Fragment>
 
@@ -368,4 +362,4 @@ class Index extends React.Component{
     }
 }
 
-export default withStyles(useStyles)( Index );
+export default withStyles(useStyles)(H5);

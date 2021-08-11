@@ -1,7 +1,7 @@
 import React from "react";
 import DataApi from "../../DataApi";
-import {GridList, GridListTile, GridListTileBar, Hidden, IconButton} from "@material-ui/core";
-import {ShareOutlined, Twitter} from "@material-ui/icons";
+import {GridList, GridListTile, GridListTileBar,  IconButton} from "@material-ui/core";
+import {ShareOutlined } from "@material-ui/icons";
 
 class RecentlyToken extends React.Component {
 
@@ -16,7 +16,7 @@ class RecentlyToken extends React.Component {
 
         let tokens = await DataApi.pageTokens(0);
         if(tokens&& tokens.code==="0"){
-            this.setState({tokens: tokens.data.slice(0,12)});
+            this.setState({tokens: tokens.data.slice(0,this.props.h5?4:12)});
         }
 
     }
@@ -30,19 +30,17 @@ class RecentlyToken extends React.Component {
     render() {
         return (
 
-            <GridList cellHeight={150} cols={9}>
+            <GridList cellHeight={this.props.h5?120:150} cols={this.props.h5?3:9}>
                 {
 
                     this.state.tokens.map((token,index)=>(
 
-                        <GridListTile cols={index<3?3:1} key={token.gene} rows={index<3?3:1}>
+                        <GridListTile cols={index<(this.props.h5?1:3)?3:1} key={token.gene} rows={index<(this.props.h5?1:3)?3:1}>
                             <img src={token.originalimage+ (index<3?"/thumb":"/thumb2")} onClick={this.handleClick} data-index={index} alt={token.name}
                                  style={{cursor: "pointer"}}/>
-                                 <Hidden smDown>
-                            {index<3&&
+                            {index<(this.props.h5?1:3)&&
                                 <GridListTileBar
                                     title={token.name}
-                                    // subtitle={<span>gene: {token.gene}</span>}
                                     actionIcon={
                                         <React.Fragment>
                                             <a rel="noreferrer" href={"https://opensea.io/assets/0xaba31c041e916e4141036f080b554d40cdb2bcd0/"+ token.tokenId } target={"_blank"}>
@@ -54,7 +52,6 @@ class RecentlyToken extends React.Component {
                                     }
                                 />
                             }
-                                 </Hidden>
                         </GridListTile>
                     ))
                 }

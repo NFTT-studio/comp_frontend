@@ -10,9 +10,21 @@ let styleTimeItem = {
     width: "140px"
 
 }
+let styleTimeItemH5 = {
+    textAlign:"center",
+    margin:"10px",
+    fontSize: "15px",
+    fontWeight: "bloder",
+    width: "60px"
+
+}
 let styleTimeNumber = {
     margin:"15px",
     fontSize: "80px"
+}
+let styleTimeNumberH5 = {
+    margin:"10px",
+    fontSize: "40px"
 }
 class Timer extends React.Component {
     constructor(props) {
@@ -47,23 +59,23 @@ class Timer extends React.Component {
         return (
              <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                  {d>0&&
-                     <Grid item style={styleTimeItem}>
-                         <Grid item xs={12} style={styleTimeNumber}>{d}</Grid>
+                     <Grid item style={this.props.h5?styleTimeItemH5:styleTimeItem}>
+                         <Grid item xs={12} style={this.props.h5?styleTimeNumberH5: styleTimeNumber}>{d}</Grid>
                          <Grid item xs={12}>DAY</Grid>
                      </Grid>
                  }
                  {h>0&&
-                     <Grid item style={styleTimeItem}>
-                         <Grid item xs={12} style={styleTimeNumber}>{h}</Grid>
+                     <Grid item style={this.props.h5?styleTimeItemH5:styleTimeItem}>
+                         <Grid item xs={12} style={this.props.h5?styleTimeNumberH5: styleTimeNumber}>{h}</Grid>
                          <Grid item xs={12}>HOURS</Grid>
                      </Grid>
                  }
-                 <Grid  item style={styleTimeItem}>
-                    <Grid item xs={12} style={styleTimeNumber}>{m}</Grid>
+                 <Grid  item style={this.props.h5?styleTimeItemH5:styleTimeItem}>
+                    <Grid item xs={12} style={this.props.h5?styleTimeNumberH5:styleTimeNumber}>{m}</Grid>
                     <Grid item xs={12}>MINUTES</Grid>
                  </Grid>
-                 <Grid style={styleTimeItem}>
-                    <Grid item style={styleTimeNumber} xs={12}>{s}</Grid>
+                 <Grid style={this.props.h5?styleTimeItemH5:styleTimeItem}>
+                    <Grid item style={this.props.h5?styleTimeNumberH5:styleTimeNumber} xs={12}>{s}</Grid>
                     <Grid item xs={12}>SECONDS</Grid>
                  </Grid>
 

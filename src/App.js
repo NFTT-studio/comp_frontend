@@ -9,7 +9,7 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions,
-  Dialog, Container, Grid,
+  Dialog, Container, Grid, Toolbar, AppBar, Hidden, Typography,
 
 } from '@material-ui/core';
 import DataApi from "./DataApi";
@@ -21,7 +21,7 @@ import Header from "./componets/header/Header";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import StandardList from "./componets/facebook/Facebook";
 import Index from "./componets/index/Index";
-
+import H5 from "./componets/h5/H5"
 const useStyles = theme=>({
   root: {
     paddingTop: theme.spacing(10),
@@ -185,6 +185,12 @@ class App extends React.Component{
                 }
 
             <Switch>
+              <Route path="/h5">
+                <H5
+                    onMessage={(message)=>{this.setState({alertMessage:message})}}
+                    account={this.state.currentAccount}
+                />
+              </Route>
               <Route path="/facebook"><StandardList onTokenClick={this._showDiff}
                                                     standardList={this.state.standardList}/> </Route>
               <Route path="/"><Index
@@ -193,6 +199,7 @@ class App extends React.Component{
                   onTokenClick={this._showDiff}
                   onPendding={()=>{ this.setState({pendding:!this.state.pendding})  } }
                   /> </Route>
+
             </Switch>
               </Grid>
 
@@ -200,6 +207,23 @@ class App extends React.Component{
           </Router>
 
           <Footer />
+
+          <Hidden smUp>
+          <AppBar position={"fixed"} style={{top: 'auto',bottom: 0}}>
+            <Toolbar >
+              <Grid item  xs={12} style={{display:"flex",justifyContent:"center",justifyItems:"center",alignItems:"center" }}>
+                {this.state.currentAccount&&
+                <Typography variant="subtitle1" noWrap style={{minWidth:"460"}} >
+                  Address: {this.state.currentAccount}
+                </Typography>
+                }
+                {!this.state.currentAccount &&
+                <Button variant="contained" color={"secondary"} onClick={this._handleConnectClick}>Connect Wallet</Button>
+                }
+              </Grid>
+            </Toolbar>
+          </AppBar>
+          </Hidden>
 
           <Backdrop  style={{
             zIndex: 1000000,

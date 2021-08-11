@@ -1,4 +1,4 @@
-import {Box} from "@material-ui/core";
+import {Box, Hidden} from "@material-ui/core";
 import React from "react";
 import wechatgroup from "../../assets/img/wechat-comp-group.png"
 import telegramengroup from "../../assets/img/telegram-en.png"
@@ -25,17 +25,19 @@ class Contactgroup extends React.Component {
         return (
             <React.Fragment>
 
-            <Box style={{display:"flex",alignItems:"center",justifyContent:"center",}}>
+            <Box style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:this.props.h5?"column":"row"}}>
                 <Box m={5}>
                 <img alt={"https://t.me/NFTmart"} className={classes.img} width={150} src={telegramengroup}/>
                 <br/>
                 https://t.me/NFTmart(EN)
                 </Box>
+                <Hidden smDown>
                 <Box m={5}>
                 <img alt={"https://t.me/NFTMartio"} className={classes.img} width={150} src={telegramchgroup}/>
                 <br/>
                 https://t.me/NFTMartio(CN)
                 </Box>
+                </Hidden>
                 <Box m={5} textAlign={"center"}>
                 <img alt={"wechat"} className={classes.img} width={150} src={wechatgroup}/>
                     <br/>
