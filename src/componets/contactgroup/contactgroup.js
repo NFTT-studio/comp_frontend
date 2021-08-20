@@ -1,8 +1,7 @@
-import {Box, Hidden} from "@material-ui/core";
+import {Box} from "@material-ui/core";
 import React from "react";
 import wechatgroup from "../../assets/img/wechat-comp-group.png"
 import telegramengroup from "../../assets/img/telegram-en.png"
-import telegramchgroup from "../../assets/img/telegram-ch.png"
 
 import {withStyles} from "@material-ui/core";
 
@@ -29,15 +28,8 @@ class Contactgroup extends React.Component {
                 <Box m={5}>
                 <img alt={"https://t.me/NFTmart"} className={classes.img} width={150} src={telegramengroup}/>
                 <br/>
-                https://t.me/NFTmart(EN)
+                https://t.me/COMPOfficial
                 </Box>
-                <Hidden smDown>
-                <Box m={5}>
-                <img alt={"https://t.me/NFTMartio"} className={classes.img} width={150} src={telegramchgroup}/>
-                <br/>
-                https://t.me/NFTMartio(CN)
-                </Box>
-                </Hidden>
                 <Box m={5} textAlign={"center"}>
                 <img alt={"wechat"} className={classes.img} width={150} src={wechatgroup}/>
                     <br/>
