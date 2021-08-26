@@ -108,6 +108,7 @@ class H5 extends React.Component{
     }
 
     _loadUserInfo= async ()=>{
+
         let [addressTokens,cooltime] = await Promise.all(
             [
             DataApi.fetchAddressTokens(this.state.account),
@@ -320,7 +321,7 @@ class H5 extends React.Component{
                                         </Typography>
 
                                         <Typography style={{ marginTop:"25px" }}>
-                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Hold 1 NMT</a>
+                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Buy NMT</a>
                                         </Typography>
 
                                     </Grid>

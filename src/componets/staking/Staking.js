@@ -1,8 +1,9 @@
 import React from "react";
-import {Button, Grid,  DialogActions,Dialog,DialogTitle,DialogContent,
-    List,ListItem,ListItemAvatar,ListItemText,Checkbox,Avatar,
-    ListItemSecondaryAction,Slide,DialogContentText,CircularProgress
-    } from "@material-ui/core";
+import {
+    Button, Grid, DialogActions, Dialog, DialogTitle, DialogContent,
+    List, ListItem, ListItemAvatar, ListItemText, Checkbox, Avatar,
+    ListItemSecondaryAction, Slide, DialogContentText, CircularProgress, Hidden
+} from "@material-ui/core";
 import CompStakingContractUtil from "../../CompStakingContract";
 import detectEthereumProvider from "@metamask/detect-provider";
 
@@ -57,6 +58,7 @@ class Staking extends React.Component {
         return this.state.chainId === "0x1";
     }
     componentDidMount =async ()=> {
+
         this.provider = await detectEthereumProvider();
 
         if (this.provider) {
@@ -284,7 +286,14 @@ class Staking extends React.Component {
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
 
                         <Grid item >
-
+                            <Grid item xs={12} style={styleStakingNumber}>
+                                {parseInt( this.state.availableBouns)}
+                            </Grid>
+                            <Grid item xs={12} style={styleStakingItem}>
+                                Bonus(NMT)
+                            </Grid>
+                        </Grid>
+                        <Grid item >
                             <Grid item xs={12} style={styleStakingNumber}>
                                 {this.state.totalPower}
                             </Grid>
@@ -292,16 +301,17 @@ class Staking extends React.Component {
                                 Total Power
                             </Grid>
                         </Grid>
-
+                        <Hidden mdDown>
                         <Grid item >
+
                             <Grid item xs={12} style={styleStakingNumber}>
-                                {parseInt( this.state.availableBouns)}
+                                {(this.state.availableBouns/this.state.totalPower).toFixed(1)}
                             </Grid>
                             <Grid item xs={12} style={styleStakingItem}>
-                                Bouns(NMT)
+                                Price
                             </Grid>
-
                         </Grid>
+                        </Hidden>
 
                         <Grid item xs={12} style={styleStakingItem}>
                             <Grid>
@@ -312,8 +322,6 @@ class Staking extends React.Component {
                         <Grid item  xs={12} style={{display:"flex",alignItems:"center" ,justifyContent:"center"}} >
                             <Button disabled={this.state.approveTx!==null || this.state.stakingTx!==null || this.state.redeemTx!==null }   variant="contained" color="secondary" onClick={this._showStaking} style={{margin: "20px"}}
                                     size={"large"}>Staking</Button>
-
-
                             <Button disabled={this.state.stakingPower===0 || this.state.approveTx!==null || this.state.stakingTx!==null || this.state.redeemTx!==null} variant="contained" color="secondary" onClick={this._showRedeem}  style={{margin: "20px"}}
                                     size={"large"}>Redeem(1%Fee)</Button>
                         </Grid>
