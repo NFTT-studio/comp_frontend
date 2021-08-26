@@ -24,7 +24,7 @@ class CompContractUtil{
 
      mint=async(luckdata,giftContractAddress)=>{
           const signer = this.provider.getSigner()
-          let tx = await this.contract.connect(signer).mint(luckdata,giftContractAddress,{gasLimit: 300000});
+          let tx = await this.contract.connect(signer).mint(luckdata,giftContractAddress,{gasLimit:350000});
          return tx;
      }
 

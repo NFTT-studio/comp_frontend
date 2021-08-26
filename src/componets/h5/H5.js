@@ -19,6 +19,7 @@ import About from "../about/About";
 
 import {withStyles} from "@material-ui/core";
 import Contactgroup from "../contactgroup/contactgroup";
+import Staking from "../staking/Staking";
 
 const useStyles = theme=>({
     section_title:{
@@ -335,7 +336,18 @@ class H5 extends React.Component{
                                 }
                             </Grid>
                         </Grid>
-
+                {(new URLSearchParams(window.location.search)).get("debug") === "true" &&
+                <Grid item xs={12}>
+                    <Typography variant="h4" className={classes.section_title}>
+                        Staking
+                    </Typography>
+                    <Staking h5={true} account={this.state.account}
+                             tokens={this.state.currentMint}
+                             onMessage={this.props.onMessage}
+                             chainId={this.state.chainId}
+                    />
+                </Grid>
+                }
                         {this.state.currentMint.length > 0 &&
                         <Grid item xs={12}>
                             <Typography variant="h4" className={classes.section_title}>
