@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core";
 import CompStakingContractUtil from "../../CompStakingContract";
 import detectEthereumProvider from "@metamask/detect-provider";
+import Alert from "@material-ui/lab/Alert";
 
 let styleStakingItem = {
     textAlign:"center",
@@ -297,7 +298,9 @@ class Staking extends React.Component {
             <React.Fragment>
                 <div elevation={3} style={{padding: "30px  0px"}}>
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
-
+                        <Grid item xs={12} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                            <Alert severity="info">Bonus pool will be injected into <b>28880NMT</b>  after COMP-2888</Alert>
+                        </Grid>
                         <Grid item >
                             <Grid item xs={12} style={styleStakingNumber}>
                                 {parseInt( this.state.availableBouns)}
