@@ -51,7 +51,9 @@ class Staking extends React.Component {
                         redeemTx: this._localGet("redeemTx"), //localStorage.getItem("redeemTx"),
                         stakedItemMap:[],
                         selectItem:{},
-                        openRedeem:false
+                        openRedeem:false,
+                        nmtbalance:0,
+                        tmpStakingNMT:0
                     };
     }
     _isMainChain=()=>{
@@ -156,7 +158,9 @@ class Staking extends React.Component {
         }else{
             selectItem[""+index] = this.props.tokens[index];
         }
-        this.setState({selectItem:selectItem});
+        //todo
+
+        this.setState({selectItem:selectItem,tmpStakingNMT:  this._stakingNMT()});
 
     }
     handleStakingConfirmClose = ()=>{
@@ -272,7 +276,7 @@ class Staking extends React.Component {
         }
     }
 
-    _showStaking = ()=>{
+    _showStaking = async ()=>{
         if(this.props.tokens.length===0){
             this.alertMessage("Please Mint First");
             return ;
@@ -282,7 +286,9 @@ class Staking extends React.Component {
             return ;
         }
 
-        this.setState({openStaking:true, selectItem:{}});
+        this.setState({openStaking:true,
+            nmtbalance:await this.compStakingContractUtil.NMTBalance(this.props.account),
+            selectItem:{}});
     }
     _showRedeem =() =>{
         if(!this._isMainChain()){
@@ -291,6 +297,16 @@ class Staking extends React.Component {
         }
         this.setState({openRedeem:true});
     }
+    _stakingNMT=()=>{
+        let stakingNMT = 0;
+        Object.keys(this.state.selectItem).forEach(
+        (key)=>{
+                stakingNMT+=
+                Math.ceil(this.calcPower( this.state.selectItem[key].gene)* (this.state.availableBouns/this.state.totalPower))
+            }
+        );
+        return stakingNMT;
+    }
 
     render(){
 
@@ -298,8 +314,9 @@ class Staking extends React.Component {
             <React.Fragment>
                 <div elevation={3} style={{padding: "30px  0px"}}>
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
-                        <Grid item xs={12} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                            <Alert severity="info">Bonus pool will be injected into <b>28880NMT</b>  after COMP #2888</Alert>
+                        <Grid item xs={12} style={{display:"flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
+                            <Alert severity="info">Bonus pool will be injected into <b>28880NMT</b>  after COMP #2888,then price will up to rise to <b>{ ( (parseInt(this.state.availableBouns)+28880) / this.state.totalPower).toFixed(1) }</b></Alert>
+                            <Alert severity="warning" style={{margin:"10px"}}>When selling Staking COMP, pay attention to setting a suitable price</Alert>
                         </Grid>
                         <Grid item >
                             <Grid item xs={12} style={styleStakingNumber}>
@@ -399,7 +416,7 @@ class Staking extends React.Component {
                                             />
                                         </ListItemAvatar>
                                         <ListItemText id={labelId} primary={ value.name
-                                        +" (P:"+ this.calcPower( value.gene) +" N:"
+                                        +" (p:"+ this.calcPower( value.gene) +" n:"
                                         + Math.ceil(this.calcPower( value.gene)* (this.state.availableBouns/this.state.totalPower))
                                         +")" } />
                                     </ListItem>
@@ -429,7 +446,7 @@ class Staking extends React.Component {
                                             />
                                         </ListItemAvatar>
                                         <ListItemText id={labelId} primary={ value.name
-                                                +" (P:"+ this.calcPower( value.gene) +" N:"
+                                                +" (p:"+ this.calcPower( value.gene) +" n:"
                                                 + Math.ceil(this.calcPower( value.gene)* (this.state.availableBouns/this.state.totalPower))
                                             +")" } />
                                         {/*<ListItemText id={labelId} primary={value.name} />*/}
@@ -448,10 +465,22 @@ class Staking extends React.Component {
                         </List>
                     </DialogContent>
                     <DialogActions>
+                        <Button disabled={true}>Staking(NMT): {this.state.tmpStakingNMT}</Button>
+                        <Button disabled={true}>Balance(NMT): {this.state.nmtbalance}</Button>
+                        {this.state.tmpStakingNMT < this.state.nmtbalance ?
 
-                        <Button disabled={Object.keys(this.state.selectItem).length===0} autoFocus onClick={this.submitSelectItem} color="primary">
-                           Submit
-                        </Button>
+                            <Button disabled={Object.keys(this.state.selectItem).length === 0} autoFocus
+                                    onClick={this.submitSelectItem} color="primary">
+                                Submit
+                            </Button>
+                            :
+                            <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">
+                                <Button disabled={true}>
+                                Buy NMT
+                                </Button>
+                            </a>
+
+                        }
                     </DialogActions>
                 </Dialog>
 

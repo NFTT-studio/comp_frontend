@@ -39,12 +39,16 @@ class CompStakingContractUtil{
      }
 
      isNMTBalanceEnough=async (owner,amount)=>{
+
+          return this.NMTBalance(owner) >= parseInt( amount);
+     }
+     NMTBalance=async (owner)=>{
           const balanceOfabi = [
                "function balanceOf(address) view returns (uint)"
           ];
           const contract = new ethers.Contract(this.poolContractAddress, balanceOfabi, this.provider);
           const balance = await contract.balanceOf(owner);
-          return parseInt(ethers.utils.formatEther( balance)) >= parseInt( amount);
+          return parseInt(ethers.utils.formatEther( balance))
      }
 
 
