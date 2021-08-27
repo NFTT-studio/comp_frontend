@@ -337,7 +337,7 @@ class H5 extends React.Component{
                                 }
                             </Grid>
                         </Grid>
-                {(new URLSearchParams(window.location.search)).get("debug") === "true" &&
+                {/*{(new URLSearchParams(window.location.search)).get("debug") === "true" &&*/}
                 <Grid item xs={12}>
                     <Typography variant="h4" className={classes.section_title}>
                         Staking
@@ -348,7 +348,7 @@ class H5 extends React.Component{
                              chainId={this.state.chainId}
                     />
                 </Grid>
-                }
+                {/*}*/}
                         {this.state.currentMint.length > 0 &&
                         <Grid item xs={12}>
                             <Typography variant="h4" className={classes.section_title}>

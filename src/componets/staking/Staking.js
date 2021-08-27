@@ -426,8 +426,6 @@ class Staking extends React.Component {
                     </DialogContent>
                 </Dialog>
 
-
-
                 <Dialog onClose={this.handleCloseStakingDialog} aria-labelledby="customized-dialog-title" open={this.state.openStaking}>
                     <DialogTitle id="customized-dialog-title" onClose={this.handleCloseStakingDialog}>
                         Staked List
