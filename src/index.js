@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-const theme =createMuiTheme( {
+const theme =createTheme( {
     typography: {
         // fontFamily: 'TTHoves',
     },

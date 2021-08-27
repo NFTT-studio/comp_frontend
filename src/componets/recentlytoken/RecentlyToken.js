@@ -1,6 +1,6 @@
 import React from "react";
 import DataApi from "../../DataApi";
-import {GridList, GridListTile, GridListTileBar,  IconButton} from "@material-ui/core";
+import {ImageList, ImageListItem, ImageListItemBar,  IconButton} from "@material-ui/core";
 import {ShareOutlined } from "@material-ui/icons";
 
 class RecentlyToken extends React.Component {
@@ -30,16 +30,16 @@ class RecentlyToken extends React.Component {
     render() {
         return (
 
-            <GridList cellHeight={this.props.h5?120:150} cols={this.props.h5?3:9}>
+            <ImageList rowHeight={this.props.h5?120:150} cols={this.props.h5?3:9}>
                 {
 
                     this.state.tokens.map((token,index)=>(
 
-                        <GridListTile cols={index<(this.props.h5?1:3)?3:1} key={token.gene} rows={index<(this.props.h5?1:3)?3:1}>
+                        <ImageListItem cols={index<(this.props.h5?1:3)?3:1} key={token.gene} rows={index<(this.props.h5?1:3)?3:1}>
                             <img src={token.originalimage+ (index<3?"/thumb":"/thumb2")} onClick={this.handleClick} data-index={index} alt={token.name}
                                  style={{cursor: "pointer"}}/>
                             {index<(this.props.h5?1:3)&&
-                                <GridListTileBar
+                                <ImageListItemBar
                                     title={token.name}
                                     actionIcon={
                                         <React.Fragment>
@@ -52,10 +52,10 @@ class RecentlyToken extends React.Component {
                                     }
                                 />
                             }
-                        </GridListTile>
+                        </ImageListItem>
                     ))
                 }
-            </GridList>
+            </ImageList>
 
 
         );

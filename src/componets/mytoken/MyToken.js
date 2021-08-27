@@ -1,5 +1,5 @@
 import React from "react";
-import {Typography, GridList, GridListTile, GridListTileBar, IconButton, Hidden} from "@material-ui/core";
+import {Typography, ImageList,  ImageListItem, ImageListItemBar, IconButton, Hidden} from "@material-ui/core";
 
 import {ShareOutlined, Twitter} from "@material-ui/icons";
 
@@ -16,18 +16,18 @@ class MyToken extends React.Component {
         return (
 
             <React.Fragment>
-            <GridList cellHeight={this.props.h5?200:300} cols={this.props.h5?2:4}>
+            <ImageList rowHeight={this.props.h5?200:300} cols={this.props.h5?2:4}>
                 {
                     this.props.tokens.map((token,index)=>(
-                        <GridListTile cols={1} key={token.gene}>
+                        <ImageListItem cols={1} key={token.gene}>
                             <img src={token.originalimage+"/thumb"} alt={token.name} onClick={this.handleClick} data-index={index} style={{cursor:"pointer"}} />
                             <Hidden smUp>
-                            <GridListTileBar
+                            <ImageListItemBar
                                 title={token.name}
                                 />
                             </Hidden>
                             <Hidden smDown>
-                            <GridListTileBar
+                            <ImageListItemBar
                                 title={token.name}
                                 actionIcon={
                                     <React.Fragment>
@@ -51,7 +51,7 @@ class MyToken extends React.Component {
                                 }
                             />
                             </Hidden>
-                        </GridListTile>
+                        </ImageListItem>
 
                     ))
                 }
@@ -59,7 +59,7 @@ class MyToken extends React.Component {
                     this.props.tokens.length===0&&
                         <Typography style={{color:"gray"}}>My wallet is empty</Typography>
                 }
-            </GridList>
+            </ImageList>
 
             </React.Fragment>
         );
