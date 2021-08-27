@@ -45,18 +45,27 @@ class Staking extends React.Component {
                         openStaking: false,
                         stakingParams:null,
                         approveDialogOpen:false,
-                        stakingTx:localStorage.getItem("stakingTx"),
-                        approveTx:localStorage.getItem("approveTx"),
-                        redeemTx:localStorage.getItem("redeemTx"),
+                        stakingTx: this._localGet("stakingTx"), // localStorage.getItem("stakingTx"),
+                        approveTx: this._localGet("approveTx"),//localStorage.getItem("approveTx"),
+                        redeemTx: this._localGet("redeemTx"), //localStorage.getItem("redeemTx"),
                         stakedItemMap:[],
                         selectItem:{},
-
                         openRedeem:false
                     };
     }
     _isMainChain=()=>{
         return this.state.chainId === "0x1";
     }
+    _localSave=(key,value)=>{
+        localStorage.setItem(this.props.account + "_" + key,value);
+    }
+    _localGet=(key)=>{
+        return localStorage.getItem(this.props.account + "_" + key);
+    }
+    _localRemove=(key)=>{
+        return localStorage.removeItem(this.props.account + "_" + key);
+    }
+
     componentDidMount =async ()=> {
 
         this.provider = await detectEthereumProvider();
@@ -128,9 +137,13 @@ class Staking extends React.Component {
                  if(power >0) {
                      map[i] = power;
                  }
-
             }
-            this.setState ( {stakingPower:  total,stakedItemMap: map});
+            this.setState ( {stakingPower:  total,
+                stakedItemMap: map,
+                stakingTx: this._localGet("stakingTx"),
+                approveTx: this._localGet("approveTx"),
+                redeemTx: this._localGet("redeemTx")
+            });
         }
     }
     selectComp = (e,index)=>{
@@ -150,15 +163,15 @@ class Staking extends React.Component {
     }
     _handleClearApproveTx = ()=>{
 
-        localStorage.removeItem("approveTx")
+        this._localRemove("approveTx")
         this.setState({approveTx:null});
     }
     _handleClearStakingTx = ()=>{
-        localStorage.removeItem("stakingTx")
+        this._localRemove("stakingTx");
         this.setState({stakingTx:null});
     }
     _handleClearRedeemTx = () =>{
-        localStorage.removeItem("redeemTx")
+        this._localRemove("redeemTx")
         this.setState({redeemTx:null});
     }
     handleApproveDialogClose = ()=>{
@@ -174,7 +187,7 @@ class Staking extends React.Component {
             var tx = await this.compStakingContractUtil.NMTapproveAll();
             this.setState({approveTx:tx.hash,approveDialogOpen:false});
         // tx.gt
-            localStorage.setItem("approveTx",tx.hash);
+            this._localSave("approveTx",tx.hash);
             this._checkApproveTx();
 
         }catch(err){
@@ -190,7 +203,7 @@ class Staking extends React.Component {
                     this.alertMessage("Transaction Error, Please Check it")
                 }
                 this.setState({approveTx: null});
-                localStorage.removeItem("approveTx");
+                this._localRemove("approveTx");
 
             });
         }
@@ -203,7 +216,7 @@ class Staking extends React.Component {
                     this.alertMessage("Transaction Error, Please Check it")
                 }
                 this.setState({stakingTx: null});
-                localStorage.removeItem("stakingTx");
+                this._localRemove("stakingTx");
                 window.location.reload();
             });
         }
@@ -215,7 +228,7 @@ class Staking extends React.Component {
                     this.alertMessage("Transaction Error, Please Check it")
                 }
                 this.setState({redeemTx: null});
-                localStorage.removeItem("redeemTx");
+                this._localRemove("redeemTx");
                 window.location.reload();
             });
         }
@@ -231,7 +244,7 @@ class Staking extends React.Component {
 
             this.setState({stakingTx: stakingTx.hash, stakingParams: null});
             // tx.gt
-            localStorage.setItem("stakingTx", stakingTx.hash);
+            this._localSave("stakingTx", stakingTx.hash);
             this._checkStakingTx();
 
             this.handleStakingConfirmClose();
@@ -248,7 +261,7 @@ class Staking extends React.Component {
             var redeemTx = await this.compStakingContractUtil.redeem(tokenId);
             this.setState({redeemTx: redeemTx.hash, openRedeem: false});
             // tx.gt
-            localStorage.setItem("redeemTx", redeemTx.hash);
+            this._localSave("redeemTx", redeemTx.hash);
             this._checkRedeemTx();
 
             this.handleStakingConfirmClose();
@@ -331,7 +344,7 @@ class Staking extends React.Component {
                                 <Grid item xs={12} style={center}>
                                         <CircularProgress color={"inherit"} size={20}/>
                                         <br/>
-                                    <Grid>Approve Tx: <a  rel="noreferrer" style={ link_text} href={"https://etherscan.io/tx/"+ this.state.approveTx} >{
+                                    <Grid>Approve Tx: <a target={"_blank"} rel="noreferrer" style={ link_text} href={"https://etherscan.io/tx/"+ this.state.approveTx} >{
                                         this.props.h5?  this.state.approveTx.substring(0,20)+"...":this.state.approveTx
                                     } </a></Grid>
                                     <br/>
@@ -341,7 +354,7 @@ class Staking extends React.Component {
                                 {this.state.stakingTx &&
                                     <Grid item xs={12} style={center}>
                                             <CircularProgress color={"inherit"} size={20}/><br/>
-                                        <Grid>Staking Tx:<a rel="noreferrer" style={ link_text} href={"https://etherscan.io/tx/"+ this.state.stakingTx} target={"_blank"}> {
+                                        <Grid>Staking Tx:<a  rel="noreferrer" style={ link_text} href={"https://etherscan.io/tx/"+ this.state.stakingTx} target={"_blank"}> {
                                             this.props.h5?  this.state.stakingTx.substring(0,20)+"...":this.state.stakingTx
                                             }</a></Grid>
                                         <br/>

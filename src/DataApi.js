@@ -20,5 +20,6 @@ class DataApi{
         let res = await fetch(uri);
         return await res.json();
     }
+
 }
 export default DataApi
