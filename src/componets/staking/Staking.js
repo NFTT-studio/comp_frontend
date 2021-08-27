@@ -316,7 +316,7 @@ class Staking extends React.Component {
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
                         <Grid item xs={12} style={{display:"flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
                             <Alert severity="info">
-                                After COMP#2888, <b>28880NMT</b> will be injected into the bonus pool and the price will rise to <b>{ ( (parseInt(this.state.availableBouns)+28880) / this.state.totalPower).toFixed(1) }</b></Alert>
+                                After COMP#2888, <b>28880NMT</b> will be injected into the bonus pool and the price will rise to <b>{this.state.totalPower>0? ( (parseInt(this.state.availableBouns)+28880) / this.state.totalPower).toFixed(1):0 }</b></Alert>
                             <Alert severity="warning" style={{margin:"10px"}}>When selling Staking COMP, pay attention to setting a suitable price</Alert>
                         </Grid>
                         <Grid item >
@@ -339,7 +339,7 @@ class Staking extends React.Component {
                         <Grid item >
 
                             <Grid item xs={12} style={styleStakingNumber}>
-                                {(this.state.availableBouns/this.state.totalPower).toFixed(1)}
+                                {this.state.totalPower>0?(this.state.availableBouns/this.state.totalPower).toFixed(1):0}
                             </Grid>
                             <Grid item xs={12} style={styleStakingItem}>
                                 Price
@@ -349,7 +349,7 @@ class Staking extends React.Component {
 
                         <Grid item xs={12} style={styleStakingItem}>
                             <Grid>
-                                My Staked Power: {this.state.stakingPower} ≈ { parseInt(this.state.stakingPower * this.state.availableBouns / this.state.totalPower)} NMT
+                                My Staked Power: {this.state.stakingPower} ≈ {this.state.totalPower>0?  parseInt(this.state.stakingPower * this.state.availableBouns / this.state.totalPower):0} NMT
                             </Grid>
                         </Grid>
                         {/*<Grid container>*/}
