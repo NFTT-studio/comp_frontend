@@ -299,7 +299,7 @@ class Staking extends React.Component {
                 <div elevation={3} style={{padding: "30px  0px"}}>
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
                         <Grid item xs={12} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                            <Alert severity="info">Bonus pool will be injected into <b>28880NMT</b>  after COMP-2888</Alert>
+                            <Alert severity="info">Bonus pool will be injected into <b>28880NMT</b>  after COMP #2888</Alert>
                         </Grid>
                         <Grid item >
                             <Grid item xs={12} style={styleStakingNumber}>
