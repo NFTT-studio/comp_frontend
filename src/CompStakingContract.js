@@ -40,7 +40,7 @@ class CompStakingContractUtil{
 
      isNMTBalanceEnough=async (owner,amount)=>{
 
-          return this.NMTBalance(owner) >= parseInt( amount);
+          return (await this.NMTBalance(owner)) >= parseInt( amount);
      }
      NMTBalance=async (owner)=>{
           const balanceOfabi = [
