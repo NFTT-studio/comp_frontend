@@ -466,7 +466,7 @@ class Staking extends React.Component {
                     <DialogActions>
                         <Button disabled={true}>Staking(NMT): {this.state.tmpStakingNMT}</Button>
                         <Button disabled={true}>Balance(NMT): {this.state.nmtbalance}</Button>
-                        {this.state.tmpStakingNMT < this.state.nmtbalance ?
+                        {this.state.tmpStakingNMT <= this.state.nmtbalance ?
 
                             <Button disabled={Object.keys(this.state.selectItem).length === 0} autoFocus
                                     onClick={this.submitSelectItem} color="primary">
