@@ -401,7 +401,6 @@ class Staking extends React.Component {
                     </DialogTitle>
                     <DialogContent dividers>
                         <List dense>
-
                             {Object.keys(this.state.stakedItemMap).map((key,index) => {
                                 const labelId = `checkbox-list-secondary-label-${index}`;
                                 const value = this.props.tokens[key];

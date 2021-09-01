@@ -272,6 +272,7 @@ class H5 extends React.Component{
                                             >
                                                     <option value={this.nmtContrctAddress}>I Hold 1 NMT</option>
                                                     <option value={"0x69af81e73a73b40adf4f3d4223cd9b1ece623074"}>I Hold 1 MASK</option>
+                                                    <option value={"0xd4342a57ecf2fe7ffa37c33cb8f63b1500e575e6"}>I Hold 1 APN</option>
 
                                                     <option value={"0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d"}>I Hold 1 FIS</option>
                                                     <option value={"0x6c5bA91642F10282b576d91922Ae6448C9d52f4E"}>I Hold 1 PHA</option>
