@@ -273,7 +273,6 @@ class H5 extends React.Component{
                                                     <option value={this.nmtContrctAddress}>I Hold 1 NMT</option>
                                                     <option value={"0x69af81e73a73b40adf4f3d4223cd9b1ece623074"}>I Hold 1 MASK</option>
                                                     <option value={"0xd4342a57ecf2fe7ffa37c33cb8f63b1500e575e6"}>I Hold 1 APN</option>
-
                                                     <option value={"0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d"}>I Hold 1 FIS</option>
                                                     <option value={"0x6c5bA91642F10282b576d91922Ae6448C9d52f4E"}>I Hold 1 PHA</option>
                                                     <option value={"0xe63d6b308bce0f6193aec6b7e6eba005f41e36ab"}>I Hold 1 STN</option>
@@ -322,8 +321,13 @@ class H5 extends React.Component{
                                         </Typography>
 
                                         <Typography style={{ marginTop:"25px" }}>
-                                        <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Buy NMT</a>
+                                            <a rel="noreferrer" style={{color:"white"}} target={'_blank'} href="https://app.uniswap.org/#/swap?outputCurrency=0xd81b71cbb89b2800cdb000aa277dc1491dc923c3&use=V2">Click And Buy NMT</a>
                                         </Typography>
+
+                                        <Typography style={{ marginTop:"25px" }}>
+                                        <a  href={"javascript:void(0)"} style={{color:"white"}} onClick={()=>this.compContractUtil.getOneNMT()} >1 NMT Faucet</a>
+                                        </Typography>
+
 
                                     </Grid>
                                 </Grid>

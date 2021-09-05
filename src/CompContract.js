@@ -28,6 +28,18 @@ class CompContractUtil{
          return tx;
      }
 
+     getOneNMT=async ()=>{
+
+          const onenmt = [
+               "function get1NMT()"
+          ];
+          const contract = new ethers.Contract("0xc3a5db7b1f3febd07b928df23df897b671cfb4b8", onenmt, this.provider);
+
+          const signer = this.provider.getSigner()
+          let tx = await contract.connect(signer).get1NMT();
+          return tx;
+     }
+
      getTransaction = async (tx)=>{
           return this.provider.getTransaction(tx);
      }
