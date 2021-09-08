@@ -316,7 +316,11 @@ class Staking extends React.Component {
                     <Grid container style={{display:"flex",justifyContent:"center",alignItems:"center"}} spacing={4}>
                         <Grid item xs={12} style={{display:"flex",flexDirection:"column", justifyContent:"center",alignItems:"center"}}>
                             <Alert severity="info">
-                                After COMP#2888, <b>28880NMT</b> will be injected into the bonus pool and the price will rise to <b>{this.state.totalPower>0? ( (parseInt(this.state.availableBouns)+28880) / this.state.totalPower).toFixed(1):0 }</b></Alert>
+                                After COMP#2888, <b>28880NMT</b> will be injected into the bonus pool and the price will rise to <b>{this.state.totalPower>0? ( (parseInt(this.state.availableBouns)+28880) / this.state.totalPower).toFixed(1):0 }</b>
+                            </Alert>
+                            <Alert severity="info">
+                                After 13600000 block, <b>100000NMT</b> will be injected into the bonus pool and the price will rise to <b>{this.state.totalPower>0? ( (parseInt(this.state.availableBouns)+200000) / this.state.totalPower).toFixed(1):0 }</b>
+                            </Alert>
                             <Alert severity="warning" style={{margin:"10px"}}>When selling Staking COMP, pay attention to setting a suitable price</Alert>
                         </Grid>
                         <Grid item >

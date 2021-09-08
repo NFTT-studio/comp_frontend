@@ -330,7 +330,6 @@ class Index extends React.Component{
                                         <Typography style={{ marginTop:"25px" }}>
                                             <a  href={"javascript:void(0)"} style={{color:"white"}} onClick={()=>this.compContractUtil.getOneNMT()} >1 NMT Faucet</a>
                                         </Typography>
-
                                     </Grid>
                                 </Grid>
                                 }
