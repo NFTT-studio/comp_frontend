@@ -352,8 +352,8 @@ class Staking extends React.Component {
                         </Grid>
                         {/*<Grid container>*/}
                         <Grid item  xs={12} style={{display:"flex",alignItems:"center" ,justifyContent:"center"}} >
-                            <Button disabled={this.state.approveTx!==null || this.state.stakingTx!==null || this.state.redeemTx!==null }   variant="contained" color="secondary" onClick={this._showStaking} style={{margin: "20px"}}
-                                    size={"large"}>Staking</Button>
+                            {/*<Button disabled={this.state.approveTx!==null || this.state.stakingTx!==null || this.state.redeemTx!==null }   variant="contained" color="secondary" onClick={this._showStaking} style={{margin: "20px"}}*/}
+                            {/*        size={"large"}>Staking</Button>*/}
                             <Button disabled={this.state.stakingPower===0 || this.state.approveTx!==null || this.state.stakingTx!==null || this.state.redeemTx!==null} variant="contained" color="secondary" onClick={this._showRedeem}  style={{margin: "20px"}}
                                     size={"large"}>Redeem(1%Fee)</Button>
                         </Grid>

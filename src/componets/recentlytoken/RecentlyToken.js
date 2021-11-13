@@ -16,7 +16,7 @@ class RecentlyToken extends React.Component {
 
         let tokens = await DataApi.pageTokens(0);
         if(tokens&& tokens.code==="0"){
-            this.setState({tokens: tokens.data.slice(0,this.props.h5?4:12)});
+            this.setState({tokens: tokens.data.slice(0,this.props.h5?31:93)});
         }
 
     }

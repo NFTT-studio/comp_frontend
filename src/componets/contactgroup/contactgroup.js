@@ -30,11 +30,11 @@ class Contactgroup extends React.Component {
                 <br/>
                 https://t.me/COMPOfficial
                 </Box>
-                <Box m={5} textAlign={"center"}>
-                <img alt={"wechat"} className={classes.img} width={150} src={wechatgroup}/>
-                    <br/>
-                wechat group
-                </Box>
+                {/*<Box m={5} textAlign={"center"}>*/}
+                {/*<img alt={"wechat"} className={classes.img} width={150} src={wechatgroup}/>*/}
+                {/*    <br/>*/}
+                {/*wechat group*/}
+                {/*</Box>*/}
             </Box>
             </React.Fragment>
         )

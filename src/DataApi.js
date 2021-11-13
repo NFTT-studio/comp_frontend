@@ -3,7 +3,7 @@ class DataApi{
     static pageTokens=async (page)=>{
         let uri = "https://api.chineseoperamaskplus.com/assets/list/"+
             // let uri = "http://localhost:8080/assets/list/"+
-            (page+1)+"/12";
+            (page+1)+"/93";
         let res = await fetch(uri);
         return await res.json();
     }
