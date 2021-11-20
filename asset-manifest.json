@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/comp_frontend/static/css/main.0deef8ee.chunk.css",
+    "main.js": "/comp_frontend/static/js/main.b8c8bb99.chunk.js",
+    "main.js.map": "/comp_frontend/static/js/main.b8c8bb99.chunk.js.map",
+    "runtime-main.js": "/comp_frontend/static/js/runtime-main.6483538f.js",
+    "runtime-main.js.map": "/comp_frontend/static/js/runtime-main.6483538f.js.map",
+    "static/js/2.c4a19ad4.chunk.js": "/comp_frontend/static/js/2.c4a19ad4.chunk.js",
+    "static/js/2.c4a19ad4.chunk.js.map": "/comp_frontend/static/js/2.c4a19ad4.chunk.js.map",
+    "static/js/3.9c10d5e0.chunk.js": "/comp_frontend/static/js/3.9c10d5e0.chunk.js",
+    "static/js/3.9c10d5e0.chunk.js.map": "/comp_frontend/static/js/3.9c10d5e0.chunk.js.map",
+    "index.html": "/comp_frontend/index.html",
+    "static/css/main.0deef8ee.chunk.css.map": "/comp_frontend/static/css/main.0deef8ee.chunk.css.map",
+    "static/js/2.c4a19ad4.chunk.js.LICENSE.txt": "/comp_frontend/static/js/2.c4a19ad4.chunk.js.LICENSE.txt",
+    "static/media/favicon.f16d0e3b.jpg": "/comp_frontend/static/media/favicon.f16d0e3b.jpg",
+    "static/media/wechat-comp-group.d4dc049f.png": "/comp_frontend/static/media/wechat-comp-group.d4dc049f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6483538f.js",
+    "static/js/2.c4a19ad4.chunk.js",
+    "static/css/main.0deef8ee.chunk.css",
+    "static/js/main.b8c8bb99.chunk.js"
+  ]
+}
