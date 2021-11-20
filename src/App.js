@@ -18,10 +18,11 @@ import Vs from "./componets/vs/Vs";
 import {withStyles} from "@material-ui/core";
 import Footer from "./componets/footer/Footer";
 import Header from "./componets/header/Header";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
 import StandardList from "./componets/facebook/Facebook";
 import Index from "./componets/index/Index";
 import H5 from "./componets/h5/H5"
+import {isMobile} from 'react-device-detect';
 const useStyles = theme=>({
   root: {
     paddingTop: theme.spacing(10),
@@ -42,6 +43,7 @@ class App extends React.Component{
   compContractUtil
 
   constructor() {
+
     super();
     this.state = {
       currentAccount:"",
@@ -60,6 +62,7 @@ class App extends React.Component{
    }
 
   async componentDidMount(){
+
     let standardArray = await  DataApi.getAllStandard();
     console.debug(standardArray);
     if(standardArray["code"]===0){

@@ -20,6 +20,7 @@ import About from "../about/About";
 import {withStyles} from "@material-ui/core";
 import Contactgroup from "../contactgroup/contactgroup";
 import Staking from "../staking/Staking";
+import {isMobile} from "react-device-detect";
 
 const useStyles = theme=>({
     section_title:{
@@ -49,7 +50,9 @@ class Index extends React.Component{
     nmtContrctAddress="0xd81b71cBb89B2800CDb000AA277Dc1491dc923C3"
     constructor(props) {
         super(props);
-
+        if(isMobile) {
+            window.location = "/h5";
+        }
         this.state = {
             currentMint:[],
             airdropConditions:this.nmtContrctAddress,
