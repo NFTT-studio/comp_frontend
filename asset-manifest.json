@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/static/css/main.0deef8ee.chunk.css",
-    "main.js": "/static/js/main.343669e2.chunk.js",
-    "main.js.map": "/static/js/main.343669e2.chunk.js.map",
+    "main.js": "/static/js/main.491e60a8.chunk.js",
+    "main.js.map": "/static/js/main.491e60a8.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.86a97d2b.js",
     "runtime-main.js.map": "/static/js/runtime-main.86a97d2b.js.map",
-    "static/js/2.c4a19ad4.chunk.js": "/static/js/2.c4a19ad4.chunk.js",
-    "static/js/2.c4a19ad4.chunk.js.map": "/static/js/2.c4a19ad4.chunk.js.map",
+    "static/js/2.79e8d145.chunk.js": "/static/js/2.79e8d145.chunk.js",
+    "static/js/2.79e8d145.chunk.js.map": "/static/js/2.79e8d145.chunk.js.map",
     "static/js/3.9c10d5e0.chunk.js": "/static/js/3.9c10d5e0.chunk.js",
     "static/js/3.9c10d5e0.chunk.js.map": "/static/js/3.9c10d5e0.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.0deef8ee.chunk.css.map": "/static/css/main.0deef8ee.chunk.css.map",
-    "static/js/2.c4a19ad4.chunk.js.LICENSE.txt": "/static/js/2.c4a19ad4.chunk.js.LICENSE.txt",
+    "static/js/2.79e8d145.chunk.js.LICENSE.txt": "/static/js/2.79e8d145.chunk.js.LICENSE.txt",
     "static/media/favicon.f16d0e3b.jpg": "/static/media/favicon.f16d0e3b.jpg",
     "static/media/wechat-comp-group.d4dc049f.png": "/static/media/wechat-comp-group.d4dc049f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.86a97d2b.js",
-    "static/js/2.c4a19ad4.chunk.js",
+    "static/js/2.79e8d145.chunk.js",
     "static/css/main.0deef8ee.chunk.css",
-    "static/js/main.343669e2.chunk.js"
+    "static/js/main.491e60a8.chunk.js"
   ]
 }
