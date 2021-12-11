@@ -41,7 +41,7 @@ function createData(key,value) {
 const rows = [
     createData("CryptoPunks","0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb"),
     createData("Hashmasks","0xc2c747e0f7004f9e8817db2ca4997657a7746928"),
-    createData("CryptoKitties","0x07c0ca4600dec713a40a7cc5f98bec70770f14c8")
+    // createData("CryptoKitties","0x07c0ca4600dec713a40a7cc5f98bec70770f14c8")
 ];
 const dnamap=[
 

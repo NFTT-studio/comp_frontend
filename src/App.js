@@ -18,7 +18,7 @@ import Vs from "./componets/vs/Vs";
 import {withStyles} from "@material-ui/core";
 import Footer from "./componets/footer/Footer";
 import Header from "./componets/header/Header";
-import {BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect, HashRouter} from "react-router-dom";
 import StandardList from "./componets/facebook/Facebook";
 import Index from "./componets/index/Index";
 import H5 from "./componets/h5/H5"
@@ -188,6 +188,7 @@ class App extends React.Component{
                 }
 
             <Switch>
+                <HashRouter>
               <Route path="/h5">
                 <H5
                     onMessage={(message)=>{this.setState({alertMessage:message})}}
@@ -202,6 +203,7 @@ class App extends React.Component{
                   onTokenClick={this._showDiff}
                   onPendding={()=>{ this.setState({pendding:!this.state.pendding})  } }
                   /> </Route>
+                </HashRouter>
 
             </Switch>
               </Grid>

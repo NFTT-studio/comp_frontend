@@ -40,7 +40,7 @@ class Header extends React.Component{
                                 <Link color="inherit" href="/" >
                                     Home
                                 </Link>
-                                <Link color={"inherit"} href="/facebook" >
+                                <Link color={"inherit"} href="/#/facebook" >
                                    Facebook
                                 </Link>
 

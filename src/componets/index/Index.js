@@ -51,7 +51,7 @@ class Index extends React.Component{
     constructor(props) {
         super(props);
         if(isMobile) {
-            window.location = "/h5";
+            window.location = "/#/h5";
         }
         this.state = {
             currentMint:[],
